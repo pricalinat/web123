@@ -78,7 +78,10 @@ def register(request):
             # email = register_form.cleaned_data.get('email')
             sex = register_form.cleaned_data.get('sex')
 
-            if password1 != password2:
+            if len(str(password1))<6:   # 密码长度不能小于六位
+                message = '密码长度不得小于6位啊亲'
+                return render(request, 'login/register.html', locals())
+            elif password1 != password2:
                 message = '两次输入的密码不同！'
                 return render(request, 'login/register.html', locals())
             else:
