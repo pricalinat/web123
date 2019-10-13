@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.conf import settings
+
 from . import models
 from . import forms
 import hashlib
@@ -28,11 +29,11 @@ def login(request):
         login_form = forms.UserForm(request.POST)
         message = '请检查填写的内容！'
         if login_form.is_valid():
-            username = login_form.cleaned_data.get('username')
+            student_id = login_form.cleaned_data.get('student_id')
             password = login_form.cleaned_data.get('password')
 
             try:
-                user = models.User.objects.get(name=username)
+                user = models.User.objects.get(student_id=student_id)
             except :
                 message = '用户不存在！'
                 return render(request, 'accounts/login.html', locals())
@@ -62,12 +63,17 @@ def register(request):
         register_form = forms.RegisterForm(request.POST)
         message = "请检查填写的内容！"
         if register_form.is_valid():
-            username = register_form.cleaned_data.get('username')
+            input_student_id = register_form.cleaned_data.get('student_id')
             password1 = register_form.cleaned_data.get('password1')
             password2 = register_form.cleaned_data.get('password2')
             # email = register_form.cleaned_data.get('email')
             # sex = register_form.cleaned_data.get('sex')
 
+            try:
+                models.BaseInfo.objects.get(baseId=input_student_id)
+            except:
+                message = '输入的学号不合法'
+                return render(request, 'accounts/register.html', locals())
             if len(str(password1)) < 6:
                 message = '密码长度不得小于6位啊亲'
                 return render(request, 'accounts/register.html', locals())
@@ -75,16 +81,20 @@ def register(request):
                 message = '两次输入的密码不同！'
                 return render(request, 'accounts/register.html', locals())
             else:
-                same_name_user = models.User.objects.filter(name=username)
+                same_name_user = models.User.objects.filter(student_id=input_student_id)
                 if same_name_user:
-                    message = '学号已经存在'
+                    message = '用户已经存在'
                     return render(request, 'accounts/register.html', locals())
                 # same_email_user = models.User.objects.filter(email=email)
                 # if same_email_user:
                 #     message = '该邮箱已经被注册了！'
                 #     return render(request, 'accounts/register.html', locals())
 
+                base_user = models.BaseInfo.objects.get(baseId=input_student_id)
+                username = base_user.baseName
+
                 new_user = models.User()
+                new_user.student_id = input_student_id
                 new_user.name = username
                 new_user.password = hash_code(password1)
                 # new_user.email = email

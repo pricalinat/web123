@@ -17,9 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 
+from accounts import views as accounts_view
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/',include('accounts.urls')),
     # path('teams/',include('teams.views')),
+    path('',accounts_view.index),
 ]
