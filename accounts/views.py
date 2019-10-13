@@ -6,6 +6,8 @@ from . import models
 from . import forms
 import hashlib
 import datetime
+
+
 # Create your views here.
 
 
@@ -34,15 +36,15 @@ def login(request):
 
             try:
                 user = models.User.objects.get(student_id=student_id)
-            except :
+            except:
                 message = '用户不存在！'
                 return render(request, 'accounts/login.html', locals())
-
 
             if user.password == hash_code(password):
                 request.session['is_login'] = True
                 request.session['user_id'] = user.id
                 request.session['user_name'] = user.name
+                request.session['student_id'] = user.student_id
                 return redirect('/accounts/index/')
             else:
                 message = '密码不正确！'
@@ -123,7 +125,19 @@ def logout(request):
     return redirect("/accounts/login/")
 
 
+def profile(request):
+    if not request.session.get('is_login', None):
+        return redirect('/accounts/login/')
+    pass
+    return render(request,'accounts/profile/profile.html')
 
 
+def change_pwd(request):
+    if not request.session.get('is_login', None):
+        return redirect('/accounts/login/')
+    pass
+    return render(request, 'accounts/profile/change_pwd.html')
 
 
+def fun(request):
+    return render(request,'accounts/fun.html')
