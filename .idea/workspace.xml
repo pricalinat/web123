@@ -4,16 +4,10 @@
     <list default="true" id="16e9d7fc-6b39-40df-9253-ca8ce7dc31ec" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/accounts/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myctf/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/myctf/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myctf/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/myctf/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/navigationbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navigationbar.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -192,7 +186,11 @@
       <workItem from="1570699526870" duration="10549000" />
       <workItem from="1570937018538" duration="12943000" />
       <workItem from="1570976491332" duration="1789000" />
-      <workItem from="1571030940867" duration="4292000" />
+      <workItem from="1571030940867" duration="5152000" />
+      <workItem from="1571037921494" duration="283000" />
+      <workItem from="1571038292788" duration="153000" />
+      <workItem from="1571038998878" duration="610000" />
+      <workItem from="1571047302501" duration="2670000" />
     </task>
     <task id="LOCAL-00001" summary="完善了数据库部分，注册登录用学号，姓名自动在表里找（用学号匹配）">
       <created>1570957542116</created>
@@ -222,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570966546527</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="增加修改密码功能">
+      <created>1571036564782</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1571036564782</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,7 +248,19 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="完善了数据库部分，注册登录用学号，姓名自动在表里找（用学号匹配）" />
-    <option name="LAST_COMMIT_MESSAGE" value="完善了数据库部分，注册登录用学号，姓名自动在表里找（用学号匹配）" />
+    <MESSAGE value="增加修改密码功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加修改密码功能" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="django-line">
+          <url>file://$PROJECT_DIR$/accounts/templates/accounts/login.html</url>
+          <line>19</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/myctf$models.coverage" NAME="models Coverage Results" MODIFIED="1570848772281" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/accounts" />

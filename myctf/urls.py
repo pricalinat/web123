@@ -26,4 +26,5 @@ urlpatterns = [
     # path('teams/',include('teams.views')),
     path('',accounts_view.index),
     path('challenges/',include('challenges.urls')),
+    path('teams/',include('teams.urls')),
 ]
