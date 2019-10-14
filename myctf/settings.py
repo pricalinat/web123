@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'accounts',
     'captcha',
     # 'teams',
+    'challenges',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
+
+LOGIN_REDIRECT_URL = '/challenges/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'challenges/uploads/')
+
+MEDIA_URL = '/uploads/'

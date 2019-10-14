@@ -25,4 +25,5 @@ urlpatterns = [
     path('accounts/',include('accounts.urls')),
     # path('teams/',include('teams.views')),
     path('',accounts_view.index),
+    path('challenges/',include('challenges.urls')),
 ]

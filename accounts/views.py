@@ -48,7 +48,6 @@ def login(request):
                 return redirect('/accounts/index/')
             else:
                 message = '密码不正确！'
-                print(user.password)
                 return render(request, 'accounts/login.html', locals())
         else:
             return render(request, 'accounts/login.html', locals())
@@ -128,15 +127,41 @@ def logout(request):
 def profile(request):
     if not request.session.get('is_login', None):
         return redirect('/accounts/login/')
-    pass
     return render(request,'accounts/profile/profile.html')
 
 
 def change_pwd(request):
     if not request.session.get('is_login', None):
         return redirect('/accounts/login/')
-    pass
-    return render(request, 'accounts/profile/change_pwd.html')
+    if request.method == 'POST':
+        update_form = forms.UpdateForm(request.POST)
+        message = "请检查填写的内容！"
+        if update_form.is_valid():
+            origin_password = update_form.cleaned_data.get('origin_password')
+            new_password = update_form.cleaned_data.get('new_password')
+            confirm_password = update_form.cleaned_data.get('confirm_password')
+
+            user = models.User.objects.get(id=request.session['user_id'])
+
+            if not user.password == hash_code(origin_password):
+                message = '原密码不正确！'
+                return render(request, 'accounts/profile/change_pwd.html', locals())
+            if len(str(new_password)) < 6:
+                message = '密码长度不得小于6位啊亲'
+                return render(request, 'accounts/profile/change_pwd.html', locals())
+            elif new_password != confirm_password:
+                message = '两次输入的密码不同！'
+                return render(request, 'accounts/profile/change_pwd.html', locals())
+
+            user.password = hash_code(new_password)
+            user.save()
+            message = '修改成功！'
+            return render(request, 'accounts/profile/change_pwd.html', locals())
+
+        else:
+            return render(request, 'accounts/profile/change_pwd.html', locals())
+    update_form = forms.UpdateForm()
+    return render(request, 'accounts/profile/change_pwd.html',locals())
 
 
 def fun(request):

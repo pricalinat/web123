@@ -15,3 +15,10 @@ class RegisterForm(forms.Form):
     password1 = forms.CharField(label="密码", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     password2 = forms.CharField(label="确认密码", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     captcha = CaptchaField(label='验证码')
+
+
+class UpdateForm(forms.Form):
+
+    origin_password = forms.CharField(label="原密码", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    new_password= forms.CharField(label="新密码", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    confirm_password = forms.CharField(label="确认密码", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))

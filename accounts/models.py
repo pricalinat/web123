@@ -14,7 +14,7 @@ class User(models.Model):
     #     default=None,
     # )
 
-    # solved_challenges = models.ManyToManyField("Challenges") # 多对多
+    # solved_challenges = models.Many ToManyField("Challenges") # 多对多
 
     def __str__(self):
         return self.name
