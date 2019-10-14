@@ -4,6 +4,7 @@
     <list default="true" id="16e9d7fc-6b39-40df-9253-ca8ce7dc31ec" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/navigationbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navigationbar.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -186,7 +187,7 @@
       <workItem from="1571037921494" duration="283000" />
       <workItem from="1571038292788" duration="153000" />
       <workItem from="1571038998878" duration="610000" />
-      <workItem from="1571047302501" duration="3887000" />
+      <workItem from="1571047302501" duration="6375000" />
     </task>
     <task id="LOCAL-00001" summary="完善了数据库部分，注册登录用学号，姓名自动在表里找（用学号匹配）">
       <created>1570957542116</created>
@@ -237,7 +238,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571050423019</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="整合三个app">
+      <created>1571052813007</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1571052813007</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -261,17 +269,6 @@
     <MESSAGE value="增加修改密码功能" />
     <MESSAGE value="整合三个app" />
     <option name="LAST_COMMIT_MESSAGE" value="整合三个app" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="django-line">
-          <url>file://$PROJECT_DIR$/accounts/templates/accounts/login.html</url>
-          <line>19</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/myctf$models.coverage" NAME="models Coverage Results" MODIFIED="1570848772281" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/accounts" />

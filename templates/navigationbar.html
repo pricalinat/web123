@@ -10,6 +10,7 @@
 	{% block title %}
 	{% endblock %}
 
+    <link rel="shortcut icon" href="/static/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/bootstrap.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/navigationbar.css' %}">
 	<link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
@@ -44,6 +45,9 @@
 						<li class="des"><a href="/accounts/login/">Login</a></li>
 					{% endif %}
 					<li class="des"><a href="/accounts/profile/">Profile</a></li>
+                    {% if request.session.is_login %}
+						<li class="welcome" style="color: rgba(255,255,255,.9);font-weight: 500;">欢迎你，{{ request.session.user_name }}！</li>
+					{% endif %}
 				</ul>
 			</div>
 		</div>
