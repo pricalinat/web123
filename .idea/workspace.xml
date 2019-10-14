@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="16e9d7fc-6b39-40df-9253-ca8ce7dc31ec" name="Default Changelist" comment="" />
+    <list default="true" id="16e9d7fc-6b39-40df-9253-ca8ce7dc31ec" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +186,7 @@
       <workItem from="1571037921494" duration="283000" />
       <workItem from="1571038292788" duration="153000" />
       <workItem from="1571038998878" duration="610000" />
-      <workItem from="1571047302501" duration="3032000" />
+      <workItem from="1571047302501" duration="3887000" />
     </task>
     <task id="LOCAL-00001" summary="完善了数据库部分，注册登录用学号，姓名自动在表里找（用学号匹配）">
       <created>1570957542116</created>
@@ -227,7 +230,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571050058331</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="整合三个app">
+      <created>1571050423019</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1571050423019</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

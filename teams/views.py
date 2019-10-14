@@ -7,11 +7,15 @@ from . import models
 
 # Create your views here.
 def index(request):
+    if not request.session.get('is_login', None):
+        return redirect('/accounts/login/')
     teams = models.Team.objects.all()
     return render(request, 'teams/team_list.html', {'teams': teams})
 
 
 def teamcreate(request):  # 仿造注册流程写的  怎样将团队信息和个人信息联系在一起 创建完团队后将创建人的信息录入团队中
+    if not request.session.get('is_login', None):
+        return redirect('/accounts/login/')
     if request.method == 'POST':
         team_n = forms.TeamForm(request.POST)
         # print('nop')
@@ -40,5 +44,7 @@ def teamcreate(request):  # 仿造注册流程写的  怎样将团队信息和�
     return render(request, 'teams/teamcreate.html', locals())
 
 # def jointeam(request):
+#     if not request.session.get('is_login', None):
+        # return redirect('/accounts/login/')
 #  if request.method=='POST' :
 #     pass
