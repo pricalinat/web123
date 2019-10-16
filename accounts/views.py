@@ -19,8 +19,8 @@ def hash_code(s, salt='myctf'):
 
 
 def index(request):
-    if not request.session.get('is_login', None):
-        return redirect('/accounts/login/')
+    # if not request.session.get('is_login', None):
+    #     return redirect('/accounts/login/')
     return render(request, 'accounts/index.html')
 
 

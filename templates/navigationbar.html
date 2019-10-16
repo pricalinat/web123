@@ -6,52 +6,70 @@
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width" , initial-scale=1, viewport-fit="cover">
-	
+	          
 	{% block title %}
 	{% endblock %}
-
-    <link rel="shortcut icon" href="/static/favicon.ico">
+	<link rel="shortcut icon" href="/static/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="{% static 'bootstrap/bootstrap.min.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/navigationbar.css' %}">
-	<link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
-	<link href='https://fonts.googleapis.com/css?family=ABeeZee' rel='stylesheet'>
-	<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+	
 	<script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-
+	<style>
+			body{ font-family:"Microsoft YaHei"}
+	</style>
 	{% block customcss %}
 	{% endblock %}
 
 </head>
 <body>
-
+	
 	<!-- Navigation bar -->
-	<div id="navigationBar">
-		<div class="container">
-			<div class="navigationBarLeft">
-				<ul>
-					<li><a href="/accounts/login/">MyCTF</a></li>
-					<li class="des"><a href="/scoreboard/">Scoreboard</a></li>
-					<li class="des"><a href="/challenges/">Challenges</a></li>
-                    <li class="des"><a href="/teams/">Teams</a></li>
-				</ul>
-			</div>
-			<div class="navigationBarRight">
-				<ul>
-					<li id="navbarToggle">MENU</li>
-					{% if request.session.is_login %}
-						<li class="des"><a href="/accounts/logout/">Logout</a></li>
-					{% else %}
-						<li class="des"><a href="/accounts/login/">Login</a></li>
-					{% endif %}
-					<li class="des"><a href="/accounts/profile/">Profile</a></li>
-                    {% if request.session.is_login %}
-						<li class="welcome" style="color: rgba(255,255,255,.9);font-weight: 500;">欢迎你，{{ request.session.user_name }}！</li>
-					{% endif %}
-				</ul>
-			</div>
+	<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+		<div class="container-fluid"> 
+			
+		<div class="navbar-header" style="width: 30%;text-align:right;float: left;">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#example-navbar-collapse">
+				<span class="sr-only">切换导航</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<img src="/static/logo.png" width="45" height="45" class="d-inline-block align-top" alt="">
+			
 		</div>
-	</div>
+		<div class="collapse navbar-collapse" id="example-navbar-collapse" style="width: 60%;float: left;">
+			<ul class="nav navbar-nav">
+				<a class="navbar-brand" href="/accounts/">MyCTF</a>
+				<li class="active"><a href="/scoreboard/">Scoreboard</a></li>
+				<li><a href="/challenges/">Challenges</a></li>
+				<li><a href="/teams/">Teams</a></li>
+
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						User <b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						{% if request.session.is_login %}
+						  <li><a href="/accounts/profile/">Profile</a></li>
+                          <li class="divider"></li>
+						  <li><a href="/accounts/logout/">Logout</a></li>
+						{% else %}
+						  <li><a href="/accounts/login/">Login</a></li>
+                          <li class="divider"></li>
+                          <li><a href="/accounts/register/">Register</a></li>
+						{% endif %}
+					</ul>
+				</li>
+
+			</ul>
+
+		</div>
+        {% if request.session.is_login %}
+           <a class="navbar-brand" style="text-align: right; float: left; font-size: 15px;" >欢迎你，{{ request.session.user_name }}</a>
+        {% endif %}
+		</div>
+	</nav>
 
 	{% block custombody %}
 	{% endblock %}

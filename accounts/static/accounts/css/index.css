@@ -1,0 +1,11 @@
+/*.ctf_logo {*/
+/*    position: relative;*/
+/*    vertical-align: center;*/
+/*}*/
+
+.img_logo {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: auto auto;
+}

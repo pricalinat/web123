@@ -3,10 +3,23 @@
 {% load staticfiles %}
 
 {% block title %}
-	<title>首页</title>
+	<title>MyCTF</title>
+{% endblock %}
+
+{% block customcss %}
+{#	<link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">#}
+    <link href="{% static 'accounts/css/index.css' %}" rel="stylesheet" />
 {% endblock %}
 
 {% block custombody %}
-<h1>欢迎你，{{ request.session.user_name }}! </h1>
 
+<div class="col-md-4"></div>
+<div class="note col-md-4">
+    <div class="ctf_logo ">
+        <img src="/static/logo.svg" class="img_logo" alt="">
+    </div>
+    <br>
+    <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur autem blanditiis cupiditate distinctio dolor eaque earum eveniet harum in, incidunt odit quaerat quasi quisquam reiciendis similique sint ullam ut voluptatum!</small>
+</div>
+<div class="col-md-4"></div>
 {% endblock %}

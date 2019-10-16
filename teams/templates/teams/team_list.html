@@ -5,15 +5,35 @@
 	<title>队伍列表</title>
 {% endblock %}
 
+{% block customcss %}
+   <link href="{% static 'teams/css/team_list.css' %}" rel="stylesheet" />
+{% endblock %}
+
 {% block custombody %}
+    <div class="table-responsive">
+    <table class="table table-striped table-hover">
+    <tr>
+     <th>排名</th>
+     <th class="col-lg-pull-4">队伍名称</th>
+     <th>分数</th>
+     <th>人数</th>
+     <th>备注</th>
+    </tr>
+        {% for team in teams %}
+    <tr>
+        <td class="form-control-static">1</td>
+        <td><a href="" style="font-size:20px">{{ team.team_name }}</a></td>
+        <td>0</td>
+        <td>{{ team.team_number }}/3</td>
+        <td class="active"><a href="" id="jointeam">加入团队</a></td>
+    </tr>
+        {% endfor %}
+    </table>
+   </div>
 
-<ul>
-         {% for team in teams %}
-             <li><a href="" >{{ team.team_name }}</a></li>
-             <a href="">加入团队<a>
-         {% endfor %}
-</ul>
 
-<a href="/teams/teamcreate/" type="">创建团队</a>
+
+<a href="/teams/teamcreate/" type="" class="btn btn-primary float-right" id="createbutton">创建自己的团队</a>
+
 {% endblock %}
 

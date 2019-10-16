@@ -1,3 +1,21 @@
+{#{% extends 'navigationbar.html' %}#}
+{##}
+{#{% load staticfiles %}#}
+{##}
+{#{% block title %}#}
+{#	<title>profile</title>#}
+{#{% endblock %}#}
+{##}
+{#{% block custombody %}#}
+{#  <div class="container">#}
+{#    <div class="name"><h2>姓名：{{ request.session.user_name }}</h2></div>#}
+{#    <div class="student_id"><h2>学号：{{ request.session.student_id }}</h2></div>#}
+{#    <div class="changepwd">#}
+{#        <h4><a href="/accounts/profile/change_pwd">修改密码</a></h4>#}
+{#    </div>#}
+{#  </div> <!-- /container -->#}
+{#{% endblock %}#}
+
 {% extends 'navigationbar.html' %}
 
 {% load staticfiles %}
@@ -5,13 +23,41 @@
 {% block title %}
 	<title>profile</title>
 {% endblock %}
-
+{% block customcss %}
+<link rel="stylesheet" href="{% static 'accounts/css/profile.css' %}">
+{% endblock %}
 {% block custombody %}
-  <div class="container">
-    <div class="name"><h2>姓名：{{ request.session.user_name }}</h2></div>
-    <div class="student_id"><h2>学号：{{ request.session.student_id }}</h2></div>
-    <div class="changepwd">
-        <h4><a href="/accounts/profile/change_pwd">修改密码</a></h4>
-    </div>
-  </div> <!-- /container -->
+
+{#    <div class="header"><p>个人中心</p></div>#}
+
+ <div class="content">
+  <div  class="detail">
+      <table class="table ">
+          <tr>
+             <td style="text-align: center"><h3>账号：</h3></td>
+              <td style="text-align: left"><h3>{{ request.session.student_id }}</h3></td>
+          </tr>
+          <tr>
+             <td style="text-align: center"><h3>姓名: </h3></td>
+              <td style="text-align: left"><h3>{{ request.session.user_name}}</h3></td>
+          </tr>
+          <tr>
+              <td style="text-align: center"><h3>所属战队: </h3></td>
+              <td style="text-align: left"><h3>NULL</h3></td>
+          </tr>
+          <tr>
+              <td style="text-align: center"><h3>积分:</h3></td>
+              <td style="text-align: left"><h3>0</h3></td>
+          </tr>
+      </table>
+
+        <div class="changepwd clearfix">
+{#            <a href="/accounts/profile/change_pwd" class="active" style="font-size: large">修改密码</a>#}
+            <a href="/accounts/profile/change_pwd" class="btn btn-default" style="float: right; font-size: 18px;">修改密码</a>
+
+        </div>
+
+  </div>
+
+ </div> <!-- /container -->
 {% endblock %}

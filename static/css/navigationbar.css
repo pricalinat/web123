@@ -57,7 +57,7 @@ a:visited {
 	float: left;
 }
 
-.navigationBarLeft ul li:first-child {
+.navigationBarLeft ul li:nth-child(1) {
 	color: #eee;
 	font-weight: bold;
 	font-size: 24px;
@@ -85,7 +85,7 @@ a:visited {
 	letter-spacing: 2px;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 720px) {
 
 	.navigationBarLeft ul li:not(:first-child), .navigationBarRight ul li:not(:first-child) {
 		display: none;
@@ -110,3 +110,24 @@ a:visited {
 		padding-left: 10px;
 	}
 }
+
+/*.navbar-brand {*/
+/*  width: 60px;*/
+/*  background-image: url(/static/biglogo.png);*/
+/*  background-repeat: no-repeat;*/
+/*  background-size: 60%;*/
+/*  background-position: center center;*/
+/*}*/
+
+/*.navbar-header{*/
+/*	!*margin: auto auto;*!*/
+/*	!*text-align: center;*!*/
+/*	vertical-align: middle;*/
+/*}*/
+.logo{
+	vertical-align: center;
+}
+
+/*.des .login a{*/
+/*	padding-right: 0px;*/
+/*}*/

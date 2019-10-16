@@ -1,0 +1,30 @@
+table{
+    margin: 10px 0px;
+    width: 800px;
+}
+
+th {
+    font-size: x-large;
+    text-align: center;
+}
+
+td{
+
+    padding: 2px;
+    font-size: large;
+    font-family: 宋体;
+    font-weight: bolder;
+    text-align: center;
+}
+
+#createbutton{
+    margin: 5px 600px;
+    position: center;
+    font-size:18px;
+    color: #eeeeee;
+}
+
+#jointeam{
+    font-weight: bold;
+    border-radius: 7px;
+}
