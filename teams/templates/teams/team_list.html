@@ -10,6 +10,9 @@
 {% endblock %}
 
 {% block custombody %}
+    {% if message %}
+      <div class="alert alert-warning">{{ message }}</div>
+    {% endif %}
     <div class="table-responsive">
     <table class="table table-striped table-hover">
     <tr>
@@ -17,15 +20,15 @@
      <th class="col-lg-pull-4">队伍名称</th>
      <th>分数</th>
      <th>人数</th>
-     <th>备注</th>
+     <th></th>
     </tr>
         {% for team in teams %}
     <tr>
         <td class="form-control-static">1</td>
-        <td><a href="" style="font-size:20px">{{ team.team_name }}</a></td>
+        <td><a href="/teams/detail/{{ team.id }}/" style="font-size:20px">{{ team.team_name }}</a></td>
         <td>0</td>
-        <td>{{ team.team_number }}/3</td>
-        <td class="active"><a href="" id="jointeam">加入团队</a></td>
+        <td>{{ team.team_number }}/5</td>
+        <td class="active"><a href="/teams/join/{{ team.id }}/" id="jointeam">加入团队</a></td>
     </tr>
         {% endfor %}
     </table>
@@ -33,7 +36,7 @@
 
 
 
-<a href="/teams/teamcreate/" type="" class="btn btn-primary float-right" id="createbutton">创建自己的团队</a>
+<a href="/teams/create/" type="" class="btn btn-primary float-right" id="createbutton">创建自己的团队</a>
 
 {% endblock %}
 

@@ -15,7 +15,13 @@ class Challenges(models.Model) :
 	file = models.FileField(null=True, blank=True, upload_to=get_upload_path)
 	flag = models.CharField(max_length=500)
 
+	class Meta:
+		verbose_name = 'challenge'
+		verbose_name_plural = 'challenges'
+
 class ChallengesSolvedBy(models.Model) :
 	challenge_id =  models.CharField(max_length=250)
 	user_name = models.CharField(max_length=250)
 	points = models.IntegerField()
+	class Meta:
+		verbose_name = 'solvedChallenge'

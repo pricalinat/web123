@@ -1,11 +1,9 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-from django.conf import settings
 
 from . import models
 from . import forms
 import hashlib
-import datetime
 
 
 # Create your views here.
@@ -45,6 +43,10 @@ def login(request):
                 request.session['user_id'] = user.id
                 request.session['user_name'] = user.name
                 request.session['student_id'] = user.student_id
+                try:
+                    request.session['team_name'] = user.team.team_name
+                except:
+                    request.session['team_name'] = "暂无"
                 return redirect('/accounts/index/')
             else:
                 message = '密码不正确！'
@@ -99,7 +101,6 @@ def register(request):
                 new_user.name = username
                 new_user.password = hash_code(password1)
                 # new_user.email = email
-                # new_user.sex = sex
                 new_user.save()
 
                 # code = make_confirm_string(new_user)

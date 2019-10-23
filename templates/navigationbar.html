@@ -41,7 +41,7 @@
 		<div class="collapse navbar-collapse" id="example-navbar-collapse" style="width: 60%;float: left;">
 			<ul class="nav navbar-nav">
 				<a class="navbar-brand" href="/accounts/">MyCTF</a>
-				<li class="active"><a href="/scoreboard/">Scoreboard</a></li>
+				<li class="active"><a href="#">Scoreboard</a></li>
 				<li><a href="/challenges/">Challenges</a></li>
 				<li><a href="/teams/">Teams</a></li>
 
@@ -51,6 +51,8 @@
 					</a>
 					<ul class="dropdown-menu">
 						{% if request.session.is_login %}
+                          <li><a href="#">Message</a></li>
+                          <li class="divider"></li>
 						  <li><a href="/accounts/profile/">Profile</a></li>
                           <li class="divider"></li>
 						  <li><a href="/accounts/logout/">Logout</a></li>

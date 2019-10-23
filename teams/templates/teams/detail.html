@@ -1,0 +1,42 @@
+{% extends 'navigationbar.html' %}
+
+{% load staticfiles %}
+
+{% block title %}
+	<title>Team details</title>
+{% endblock %}
+{% block customcss %}
+<link rel="stylesheet" href="{% static 'accounts/css/profile.css' %}">
+{% endblock %}
+{% block custombody %}
+ <div class="content">
+  <div  class="detail">
+      <table class="table ">
+          <tr>
+             <td style="text-align: center"><h3>战队名称：</h3></td>
+              <td style="text-align: left"><h3>{{ team_detail.name }}</h3></td>
+          </tr>
+{#          <tr>#}
+{#             <td style="text-align: center"><h3>队长: </h3></td>#}
+{#              <td style="text-align: left"><h3>{{ team_detail.leader}}</h3></td>#}
+{#          </tr>#}
+          <tr>
+              <td style="text-align: center"><h3>成员({{ team_detail.number }}/5): </h3></td>
+              {% for member in team_detail.members %}
+              <td style="text-align: left"><h3>{{ member.name}}</h3></td>
+              {% endfor %}
+          </tr>
+          <tr>
+              <td style="text-align: center"><h3>积分:</h3></td>
+              <td style="text-align: left"><h3>{{ team_detail.score }}</h3></td>
+          </tr>
+      </table>
+
+        <div class="changepwd clearfix">
+            <a href="/teams/join/{{ team_detail.id }}/" class="btn btn-default" style="float: right; font-size: 18px;">加入战队</a>
+        </div>
+
+  </div>
+
+ </div> <!-- /container -->
+{% endblock %}
