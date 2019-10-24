@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import generic
 from . import forms
@@ -46,7 +47,7 @@ def create(request):
                     user.team = new_team
                     user.save()
                     request.session['team_name'] = user.team.team_name
-
+                    request.session['is_leader'] = 1
                     message = '创建成功'
                     return render(request, 'teams/teamcreate.html', locals())
 
@@ -91,3 +92,59 @@ def detail(request, team_id):
     team_detail['members'] = members
     team_detail['score'] = 0    # 还没写好！
     return render(request, 'teams/detail.html', {'team_detail': team_detail})
+
+
+def manage(request):
+    if not request.session.get('is_login', None):
+        return redirect('/accounts/login/')
+    if request.session['is_leader'] == 0:
+        return redirect('/accounts/profile/')
+    else:
+        user = User.objects.get(id=request.session['user_id'])
+        team = user.team
+        members = User.objects.filter(team=team)
+        number = team.team_number
+        if request.method == 'POST':
+            updateName_form = forms.updateName(request.POST)
+            message = '请检查填写的内容！'
+            if updateName_form.is_valid():
+                new_name = updateName_form.cleaned_data.get('teamname')
+                team.team_name=new_name
+                team.save()
+                request.session['team_name'] = user.team.team_name
+                message = '修改成功！'
+                return render(request, 'teams/manage.html', locals())
+            else:
+                return render(request,'teams/manage.html',locals())
+        updateName_form = forms.updateName()
+        return render(request, 'teams/manage.html', locals())
+
+def delete_member(request,user_id):
+    if not request.session.get('is_login', None):
+        return redirect('/accounts/login/')
+    if request.session['is_leader'] == 0:
+        return redirect('/accounts/profile/')
+    else:
+        d_user = User.objects.get(id=user_id)
+        team = models.Team.objects.get(team_name=request.session['team_name'])
+        d_user.team = None
+        d_user.save()
+        team.team_number-=1
+        team.save()
+        message = '成功将'+d_user.name+'移出战队'
+        user = User.objects.get(id=request.session['user_id'])
+        members = User.objects.filter(team=team)
+        number = team.team_number
+        updateName_form = forms.updateName()
+        return render(request, 'teams/manage.html', locals())
+
+def disband(request):
+    if not request.session.get('is_login', None):
+        return redirect('/accounts/login/')
+    if request.session['is_leader'] == 0:
+        return redirect('/accounts/profile/')
+    else:
+        team = models.Team.objects.get(team_name=request.session['team_name'])
+        team.delete()
+        request.session['is_leader'] = 0
+        return redirect('/')

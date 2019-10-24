@@ -1,0 +1,55 @@
+{% extends 'navigationbar.html' %}
+
+{% load staticfiles %}
+
+{% block title %}
+	<title>管理战队</title>
+{% endblock %}
+
+{% block customcss %}
+
+{#    <link href="{% static 'accounts/css/login.css' %}" rel="stylesheet" />#}
+{% endblock %}
+
+{% block custombody %}
+{#<div class="col-md-3"></div>#}
+{#<div class="col-md-6">#}
+  <div class="container">
+      {% if message %}
+          <div class="alert alert-warning">{{ message }}</div>
+      {% endif %}
+      <h3 style="text-align: center; margin-bottom: 10px">{{ request.session.team_name }}</h3>
+
+      <form action="/teams/manage/" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+              {{ updateName_form.teamename.label_tag }}
+              {{ updateName_form.teamname }}
+          </div>
+          <button type="submit" class="btn btn-primary float-right">修改</button>
+      </form>
+
+      <div style="margin-top: 10px;">
+          <h3>队员：</h3>
+          <br>
+          {% if number > 1 %}
+              {% for member in members %}
+                {% if not member.name == request.session.user_name %}
+                  <div>
+                      <div>
+                          {{member.name}}
+                          <a href="/teams/manage/delete/{{ member.id }}/" class="btn btn-info" style="margin-left: 80px;">狠心抛弃</a><br>
+                      </div>
+                      <br><br><br>
+                  </div>
+                {% endif %}
+              {% endfor %}
+          {% else %}
+              <div style="margin-bottom: 15px">您暂时还是一位光杆司令，赶紧去招募强力的队友吧！</div>
+          {% endif %}
+      </div>
+  <a href="/teams/manage/disband/" class="btn btn-danger">各回各家，各找各妈</a>
+  </div>
+{#</div>#}
+{#<div class="col-md-3"></div>#}
+{% endblock %}

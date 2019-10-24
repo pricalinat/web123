@@ -25,7 +25,12 @@
           </tr>
           <tr>
               <td style="text-align: center"><h3>所属战队: </h3></td>
-              <td style="text-align: left"><h3>{{ request.session.team_name}}</h3></td>
+              <td style="text-align: left">
+                  <h3>{{ request.session.team_name}}</h3>
+                   {% if request.session.is_leader == 1%}
+                     <a href="/teams/manage/" class="btn btn-primary">管理战队</a>
+                   {% endif %}
+              </td>
           </tr>
           <tr>
               <td style="text-align: center"><h3>积分:</h3></td>

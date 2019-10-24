@@ -45,8 +45,13 @@ def login(request):
                 request.session['student_id'] = user.student_id
                 try:
                     request.session['team_name'] = user.team.team_name
+                    if user.name == user.team.team_leader:
+                        request.session['is_leader'] = 1
+                    else:
+                        request.session['is_leader'] = 0
                 except:
                     request.session['team_name'] = "暂无"
+                    request.session['is_leader'] = 0
                 return redirect('/accounts/index/')
             else:
                 message = '密码不正确！'
@@ -128,7 +133,17 @@ def logout(request):
 def profile(request):
     if not request.session.get('is_login', None):
         return redirect('/accounts/login/')
-    return render(request,'accounts/profile/profile.html')
+    try:    # 更新战队信息
+        user = models.User.objects.get(id=request.session['user_id'])
+        request.session['team_name'] = user.team.team_name
+        if user.name == user.team.team_leader:
+            request.session['is_leader'] = 1
+        else:
+            request.session['is_leader'] = 0
+    except:
+        request.session['team_name'] = "暂无"
+        request.session['is_leader'] = 0
+    return render(request,'accounts/profile/profile.html',locals())
 
 
 def change_pwd(request):
