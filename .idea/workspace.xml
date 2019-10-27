@@ -3,13 +3,23 @@
   <component name="ChangeListManager">
     <list default="true" id="16e9d7fc-6b39-40df-9253-ca8ce7dc31ec" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/profile/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/profile/profile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenges/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenges/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenges/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenges/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenges/migrations/0002_auto_20191020_2119.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenges/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenges/static/css/addchallenge.css" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/static/css/addchallenge.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenges/static/css/challenges.css" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/static/css/challenges.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenges/templates/addchallenges.html" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/templates/addchallenges.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenges/templates/challenges.html" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/templates/challenges.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenges/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenges/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenges/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teams/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/teams/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teams/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/teams/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teams/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/teams/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/navigationbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/navigationbar.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,11 +74,12 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../miniCTF-local" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\大二上\网安平台设计\myctf\challenges\templates" />
       <recent name="F:\大二上\网安平台设计\myctf" />
       <recent name="F:\大二上\网安平台设计\myctf\accounts" />
     </key>
@@ -199,7 +210,10 @@
       <workItem from="1571214887567" duration="8571000" />
       <workItem from="1571294420502" duration="8078000" />
       <workItem from="1571634617563" duration="7999000" />
-      <workItem from="1571649015347" duration="31585000" />
+      <workItem from="1571649015347" duration="32934000" />
+      <workItem from="1572165437656" duration="1394000" />
+      <workItem from="1572182621666" duration="175000" />
+      <workItem from="1572182934537" duration="4120000" />
     </task>
     <task id="LOCAL-00001" summary="完善了数据库部分，注册登录用学号，姓名自动在表里找（用学号匹配）">
       <created>1570957542116</created>
@@ -278,7 +292,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571834069033</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="整合三个app">
+      <created>1571918204733</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1571918204733</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

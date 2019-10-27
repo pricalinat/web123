@@ -35,7 +35,9 @@ class BaseInfo(models.Model):
 
 class Team(models.Model):
     team_name = models.CharField(max_length=20, unique=True,default=None,null=True)
-    team_number = models.IntegerField(default=1)  # 人数上限为3人
+    team_number = models.IntegerField(default=1)
+
+    # 人数上限为3人
     team_leader = models.CharField(max_length=10, unique=True,default=None)  # 队长名字
 
     def __str__(self):

@@ -1,149 +1,56 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-from . import forms
+from django.views.generic import  View
+from .forms import flagForm
 from django.http import HttpResponse
 from . import models
 from accounts import models as accounts_models
+from django.template import RequestContext
+from accounts.models import User
 
 
 # Create your views here.
 
-class PassInsideView():
-    name = ''
-    challenge_id = ''
-    category = ''
-    description = ''
-    points = ''
-    file = ''
-    flag = ''
-
-    def __init__(self, name, challenge_id, category, description, points, file, flag):
-        self.name = name
-        self.challenge_id = challenge_id
-        self.category = category
-        self.description = description
-        self.points = points
-        self.file = file
-        self.flag = flag
-
-
-def assignID(a):
-    return a.lower().replace(' ', '_')
-
 
 def index(request):
+    challenge = models.Challenges.objects.all()
+    return render(request, 'challenges_list.html', {'challenge': challenge})
+
+
+def solve(request, challenge_id):
     if not request.session.get('is_login', None):
         return redirect('/accounts/login/')
-    challenge = models.Challenges.objects.order_by("points")
-    challenge_info_re_object = []
-    challenge_info_pwn_object = []
-    challenge_info_web_object = []
-    for c in challenge:
-        if c.category == 'Reverse Engineering':
-            re = PassInsideView(c.name, assignID(c.name), c.category, c.description, c.points, c.file, c.flag)
-            challenge_info_re_object.append(re)
-        elif c.category == 'Pwning':
-            p = PassInsideView(c.name, assignID(c.name), c.category, c.description, c.points, c.file, c.flag)
-            challenge_info_pwn_object.append(p)
-        elif c.category == 'Web':
-            w = PassInsideView(c.name, assignID(c.name), c.category, c.description, c.points, c.file, c.flag)
-            challenge_info_web_object.append(w)
-
-    solved_challenges_by_user = []
-    try:
-        fc = models.ChallengesSolvedBy.objects.filter(user_name=request.user)
-        for f in fc:
-            solved_challenges_by_user.append(f.challenge_id)
-    except:
-        pass
-
-    return render(request, 'challenges.html', {
-                                               'data_re': challenge_info_re_object,
-                                               'data_pwn': challenge_info_pwn_object,
-                                               'data_web': challenge_info_web_object,
-                                               'user_solved': solved_challenges_by_user})
+    challenge = models.Challenges.objects.get(id=challenge_id)
+    user_id = accounts_models.User.id
+    return render(request, 'solve.html', {'challenge':challenge,'user_id':user_id})
 
 
-def flagsubmit(request):
-    if not request.session.get('is_login', None):
-        return redirect('/accounts/login/')
-    if request.method == 'POST':
-        flag_submit = ''
-        flag_submit_id = ''
-        x = ''
-        for k in request.POST:
-            if k == 'submit':
-                continue
-            if k == 'csrfmiddlewaretoken':
-                continue
-            else:
-                x = k
-        flag_submit = request.POST[x]
-        flag_submit_id = x[:-5]
-    flag = models.Challenges.objects.get(challenge_id=flag_submit_id).flag
-    points = models.Challenges.objects.get(challenge_id=flag_submit_id).points
-    if flag == flag_submit and not request.user.is_superuser:
-        fr = models.ChallengesSolvedBy(challenge_id=flag_submit_id, user_name=request.user, points=points)
-        try:
-            fc = models.ChallengesSolvedBy.objects.filter(user_name=request.user)
-            obs = []
-            for k in fc:
-                obs.append(k.challenge_id)
-            if flag_submit_id in obs:
-                response = '<div id="flag_already"><p>ALREADY SUBMITTED</p></div>'
-            else:
-                fr.save()
-                initial_points = accounts_models.Teams.objects.get(teamname=request.user).points
-                updated_points = initial_points + points
-                accounts_models.Teams.objects.filter(teamname=request.user).update(points=updated_points)
-                response = '<div id="flag_correct"><p>CORRECT</p></div>'
-        except:
-            fr.save()
-            initial_points = accounts_models.Teams.objects.get(teamname=request.user).points
-            updated_points = initial_points + points
-            accounts_models.Teams.objects.filter(teamname=request.user).update(points=updated_points)
-            response = '<div id="flag_correct"><p>CORRECT</p></div>'
-    elif request.user.is_superuser:
-        response = '<div id="flag_already"><p>Correct, But not added to scoreboard</p></div>'
-    else:
-        response = '<div id="flag_incorrect"><p>INCORRECT</p></div>'
-    return HttpResponse(response)
+class IndexView(View):
+    def get(self,request,challenge_id):
+        form = flagForm()
+        challenge = models.Challenges.objects.get(id=challenge_id)
 
+        return render(request,'solve.html', {'challenge':challenge,'form':form})
 
+    def post(self,request,challenge_id):
+        form = flagForm(request.POST)
+        if form.is_valid():
+            flag = form.cleaned_data.get('flag')
+            challenge = models.Challenges.objects.get(id=challenge_id)
+            current_id = request.session['user_id']
+            current_user = accounts_models.User.objects.get(id=current_id)
+           # challenge.solver.all()
 
-def addchallenges(request):
-    if not request.session.get('is_login', None):
-        return redirect('/accounts/login/')
-    if request.user.is_superuser:
-        if request.method == 'POST':
-            success = 0
-            form = forms.AddChallengeForm(request.POST, request.FILES)
-            if form.is_valid():
-                success = 1
-                print(request.FILES)
-                if request.FILES:
-                    i = models.Challenges(file=request.FILES['file'],
-                                          name=request.POST['name'],
-                                          category=request.POST['category'],
-                                          description=request.POST['description'],
-                                          points=request.POST['points'],
-                                          challenge_id=assignID(request.POST['name']),
-                                          flag=request.POST['flag'])
-                    i.save()
-                else:
-                    i = models.Challenges(
-                        name=request.POST['name'],
-                        category=request.POST['category'],
-                        description=request.POST['description'],
-                        points=request.POST['points'],
-                        challenge_id=assignID(request.POST['name']),
-                        flag=request.POST['flag'])
-                    i.save()
-                return render(request, 'addchallenges.html', {'form': form, 'success': success})
-        else:
-            form = forms.AddChallengeForm()
-
-        return render(request, 'addchallenges.html', {'form': form})
-
-    else:
-        return redirect("/")
+            if challenge.solver.filter(id=current_id).exists()  :
+                return HttpResponse('have done')
+            else :
+                if flag==challenge.flag :
+                    solver = current_user
+                    challenge.solver.add(solver)
+                    # current_user.point+=challenge.point
+                    # current_user.save()
+                    return HttpResponse('success')
+                else :
+                    return HttpResponse('wrong')
+        else :
+            return HttpResponse('fail')

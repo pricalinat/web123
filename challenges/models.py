@@ -1,27 +1,33 @@
 from django.db import models
+from accounts import models as account_models
 import hashlib
+
 
 # Create your models here.
 
-def get_upload_path(instance, filename) :
-	return instance.category+'/challenges_{0}/{1}'.format(hashlib.md5(instance.name.encode('utf-8')).hexdigest(), filename)
+def get_upload_path(instance, filename):
+    return instance.category + '/challenges_{0}/{1}'.format(hashlib.md5(instance.name.encode('utf-8')).hexdigest(),
+                                                            filename)
 
-class Challenges(models.Model) :
-	name = models.CharField(max_length=250, unique=True)
-	challenge_id = models.CharField(max_length=300, primary_key=True)
-	category = models.CharField(max_length=100)
-	description = models.CharField(max_length=1000, blank=True, default="")
-	points = models.IntegerField()
-	file = models.FileField(null=True, blank=True, upload_to=get_upload_path)
-	flag = models.CharField(max_length=500)
 
-	class Meta:
-		verbose_name = 'challenge'
-		verbose_name_plural = 'challenges'
+CATEGORY_CHOICES = ((0, 'RE'),(1, 'WEB'),(2, 'PWN'))
 
-class ChallengesSolvedBy(models.Model) :
-	challenge_id =  models.CharField(max_length=250)
-	user_name = models.CharField(max_length=250)
-	points = models.IntegerField()
-	class Meta:
-		verbose_name = 'solvedChallenge'
+
+
+class Challenges(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    category = models.IntegerField(choices=CATEGORY_CHOICES)
+    massage = models.CharField(max_length=1000, blank=True, default="")
+    point = models.IntegerField(default=0)
+    file = models.FileField(null=True, blank=True, upload_to=get_upload_path)
+    flag = models.CharField(max_length=100)
+    solver = models.ManyToManyField(account_models.User,
+                                    null=True,
+                                    blank=True,
+                                    default=None)
+
+    class Meta:
+        verbose_name = 'challenge'
+        verbose_name_plural = 'challenges'
+    def __str__(self):
+        return self.name

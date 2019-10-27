@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 
 from . import models
 from . import forms
+from challenges.models import Challenges
 import hashlib
 
 
@@ -143,6 +144,12 @@ def profile(request):
     except:
         request.session['team_name'] = "暂无"
         request.session['is_leader'] = 0
+    challenges = Challenges.objects.all()
+    point = 0   # 可以封装成方法
+    for challenge in challenges:
+        solvers = list(challenge.solver.all())
+        if (user in solvers):
+            point += challenge.point
     return render(request,'accounts/profile/profile.html',locals())
 
 
