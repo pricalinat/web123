@@ -22,8 +22,16 @@
           </tr>
           <tr>
              <td style="text-align: center"><h3>题目描述</h3></td>
-              <td style="text-align: left"><h3>{{ challenge.massage }}</h3></td>
+              {% if challenge.message %}
+                <td style="text-align: left"><h3>{{ challenge.message }}</h3></td>
+              {% else %}
+                <td style="text-align: left"><h3>暂无</h3></td>
+              {% endif %}
           </tr>
+{#          <tr>#}
+{#             <td style="text-align: center"><h3>解决人数</h3></td>#}
+{#              <td style="text-align: left"><h3>{{ num }}</h3></td>#}
+{#          </tr>#}
           <tr>
              <td style="text-align: center"><h3>题目分数</h3></td>
               <td style="text-align: left"><h3>{{ challenge.point }}分</h3></td>

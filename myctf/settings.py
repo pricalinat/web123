@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'captcha',
     'teams',
     'challenges',
+    'scoreboard',
 ]
 
 MIDDLEWARE = [

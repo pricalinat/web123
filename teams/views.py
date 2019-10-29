@@ -43,6 +43,7 @@ def create(request):
                     new_team = models.Team()
                     new_team.team_name = teamname
                     new_team.team_leader = user.name
+                    new_team.point = user.point
                     new_team.save()
                     user.team = new_team
                     user.save()
@@ -70,6 +71,7 @@ def join(request,team_id):
             message = '该站队人数已达上限~'
             return render(request, 'teams/team_list.html', locals())
         user.team=team
+        team.point += user.point
         user.save()
         team.team_number += 1
         team.save()
@@ -90,7 +92,7 @@ def detail(request, team_id):
     # leader = User.objects.get(name=team.team_leader)
     # members.remove(leader)    # 语法错误，列表才有remove
     team_detail['members'] = members
-    team_detail['score'] = 0    # 还没写好！
+    team_detail['score'] = team.point    # 还没写好！
     return render(request, 'teams/detail.html', {'team_detail': team_detail})
 
 
@@ -130,6 +132,7 @@ def delete_member(request,user_id):
         d_user.team = None
         d_user.save()
         team.team_number-=1
+        team.point -= d_user.point
         team.save()
         message = '成功将'+d_user.name+'移出战队'
         user = User.objects.get(id=request.session['user_id'])

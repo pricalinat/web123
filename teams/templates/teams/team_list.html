@@ -22,15 +22,18 @@
      <th>人数</th>
      <th></th>
     </tr>
-        {% for team in teams %}
+
+    {% for team in teams %}
     <tr>
-        <td class="form-control-static">1</td>
+        <td class="form-control-static">{{  forloop.counter }}</td>
         <td><a href="/teams/detail/{{ team.id }}/" style="font-size:20px">{{ team.team_name }}</a></td>
-        <td>0</td>
+        <td>{{ team.point }}</td>
         <td>{{ team.team_number }}/5</td>
         <td class="active"><a href="/teams/join/{{ team.id }}/" id="jointeam">加入团队</a></td>
     </tr>
-        {% endfor %}
+    {% endfor %}
+
+
     </table>
    </div>
 

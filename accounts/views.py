@@ -145,11 +145,17 @@ def profile(request):
         request.session['team_name'] = "暂无"
         request.session['is_leader'] = 0
     challenges = Challenges.objects.all()
-    point = 0   # 可以封装成方法
+    solved=[]
     for challenge in challenges:
         solvers = list(challenge.solver.all())
         if (user in solvers):
-            point += challenge.point
+            solved.append(challenge)
+    length = len(solved)
+    # point = 0   # 可以封装成方法
+    # for challenge in challenges:
+    #     solvers = list(challenge.solver.all())
+    #     if (user in solvers):
+    #         point += challenge.point
     return render(request,'accounts/profile/profile.html',locals())
 
 

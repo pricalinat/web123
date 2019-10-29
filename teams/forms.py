@@ -2,7 +2,8 @@ from django import forms
 
 
 class TeamForm(forms.Form):
-    teamname = forms.CharField(label="队名", max_length=20, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    teamname = forms.CharField(label="队名", max_length=20, widget=forms.TextInput(attrs={'class': 'form-control',
+                                                                                        'autofocus': ''}))
 
 class updateName(forms.Form):
     teamname = forms.CharField(label="队名", max_length=20, widget=forms.TextInput(attrs={'class': 'form-control',

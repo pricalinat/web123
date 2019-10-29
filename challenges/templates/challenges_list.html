@@ -19,6 +19,7 @@
      <th>类型</th>
      <th>名字</th>
      <th>描述</th>
+{#     <th>解决人数</th>#}
      <th>分数</th>
      <th></th>
     </tr>
@@ -26,9 +27,13 @@
     <tr>
         <td>{{ cha.get_category_display }}</td>
         <td><a href="/challenges/{{ cha.id }}/" style="font-size:20px">{{ cha.name }}</a></td>
-        <td>{{ cha.massage }}</td>
+          {% if cha.message %}
+            <td>{{ cha.message }}</td>
+          {% else %}
+            <td>暂无</td>
+          {% endif %}
+{#        <td>{{ num }}</td>#}
         <td>{{ cha.point }}</td>
-
     </tr>
         {% endfor %}
     </table>

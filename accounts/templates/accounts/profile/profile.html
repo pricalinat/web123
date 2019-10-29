@@ -34,7 +34,17 @@
           </tr>
           <tr>
               <td style="text-align: center"><h3>积分:</h3></td>
-              <td style="text-align: left"><h3>{{ point }}</h3></td>
+              <td style="text-align: left"><h3>{{ user.point }}</h3></td>
+          </tr>
+          <tr>
+              <td style="text-align: center"><h3>解决题目:</h3></td>
+              {% if length != 0 %}
+                  {% for challenge in solved %}
+                    <td style="text-align: left"><h3>{{ challenge.name }}</h3></td>
+                  {% endfor %}
+              {% else %}
+                   <td style="text-align: left"><h3>暂无</h3></td>
+              {% endif %}
           </tr>
       </table>
 
