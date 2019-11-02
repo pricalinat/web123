@@ -86,7 +86,7 @@ class IndexView(View):
                 if not challenge.solver.exists():
                     first_blood = 1
                 challenge.solver.add(solver)
-                current_user.point += challenge.point
+                current_user.point += challenge.point   #
                 current_user.save()
                 try:
                     team = current_user.team
