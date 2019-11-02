@@ -82,6 +82,9 @@ class IndexView(View):
         else:
             if flag == challenge.flag:
                 solver = current_user
+                first_blood = 0
+                if not challenge.solver.exists():
+                    first_blood = 1
                 challenge.solver.add(solver)
                 current_user.point += challenge.point
                 current_user.save()
@@ -91,7 +94,10 @@ class IndexView(View):
                     team.save()
                 except:
                     pass
-                response = '<div id="flag_correct"><p>CORRECT</p></div>'
+                if first_blood == 1:
+                    response = '<div id="flag_correct"><p>FIRST BLOOD!</p></div>'
+                else:
+                    response = '<div id="flag_correct"><p>CORRECT</p></div>'
                 return HttpResponse(response)
             else:
                 response = '<div id="flag_incorrect"><p>INCORRECT</p></div>'
