@@ -134,3 +134,13 @@ LOGIN_REDIRECT_URL = '/challenges/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'challenges/uploads/')
 
 MEDIA_URL = '/uploads/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.qq.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = '1148042015@qq.com'
+EMAIL_HOST_PASSWORD = 'ypvfvhndgradfhbh'
+
+# 注册有效期天数
+CONFIRM_DAYS = 7
+
