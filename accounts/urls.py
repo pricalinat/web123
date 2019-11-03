@@ -13,4 +13,6 @@ urlpatterns = [
     path('fun/',views.fun),
     path('confirm/', views.user_confirm),
     path('captcha/', include('captcha.urls')),
+    path('forget/',views.forget),
+    path('reset/',views.reset_pwd),
 ]

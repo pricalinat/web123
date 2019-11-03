@@ -98,6 +98,24 @@ def send_email(email, code):
     msg.send()
 
 
+def send_email_reset(email, code):
+    from django.core.mail import EmailMultiAlternatives
+
+    subject = '来自MyCTF的重置密码邮件'
+
+    text_content = '''
+                    如果你看到这条消息，说明你的邮箱服务器不提供HTML链接功能，请联系管理员！'''
+
+    html_content = '''
+                    <p>戳<a href="http://{}/accounts/reset/?code={}" target=blank>我</a>重置密码\
+                    </p>
+                    '''.format('127.0.0.1:8000', code)
+
+    msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER, [email])
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
+
+
 def register(request):
     if request.session.get('is_login', None):
         return redirect('/accounts/index/')
@@ -147,8 +165,8 @@ def register(request):
                 send_email(email, code)
                 message = '请前往邮箱进行确认！'
                 return render(request, 'accounts/confirm.html', locals())
-                message = '注册成功'
-                return redirect("/accounts/login/")
+                # message = '注册成功'
+                # return redirect("/accounts/login/")
         else:
             return render(request, 'accounts/register.html', locals())
     register_form = forms.RegisterForm()
@@ -253,3 +271,59 @@ def change_pwd(request):
 
 def fun(request):
     return render(request, 'accounts/fun.html')
+
+
+def forget(request):
+    if request.session.get('is_login', None):
+        return redirect('/accounts/index/')
+    if request.method == 'POST':
+        email_form = forms.EmailForm(request.POST)
+        message = "请检查填写的内容！"
+        if email_form.is_valid():
+            input_email = email_form.cleaned_data.get('email')
+            if not models.User.objects.filter(email=input_email).exists():
+                message = '未找到此邮箱对应的用户'
+                return render(request, 'accounts/forget.html', locals())
+            user = models.User.objects.get(email=input_email)
+            code = make_confirm_string(user)
+            send_email_reset(input_email, code)
+            message = '请前往邮箱重置密码！'
+            return render(request, 'accounts/confirm.html', locals())
+    email_form = forms.EmailForm()
+    return render(request, 'accounts/forget.html', locals())
+
+
+def reset_pwd(request):
+    if request.session.get('is_login', None):
+        return redirect('/accounts/index/')
+    code = request.GET.get('code', None)
+    try:
+        confirm = models.ConfirmString.objects.get(code=code)
+    except:
+        message = '无效的确认请求!'
+        return render(request, 'accounts/confirm.html', locals())
+    if request.method == 'POST':
+        reset_form = forms.ResetForm(request.POST)
+        user = confirm.user
+        message = "请检查填写的内容！"
+        if reset_form.is_valid():
+            new_password = reset_form.cleaned_data.get('new_password')
+            confirm_password = reset_form.cleaned_data.get('confirm_password')
+
+            if len(str(new_password)) < 6:
+                message = '密码长度不得小于6位啊亲'
+                return render(request, 'accounts/reset.html', locals())
+            elif new_password != confirm_password:
+                message = '两次输入的密码不同！'
+                return render(request, 'accounts/reset.html', locals())
+
+            user.password = hash_code(new_password)
+            user.save()
+            confirm.delete()
+            message = '修改成功！'
+            return render(request, 'accounts/confirm.html', locals())
+
+        else:
+            return render(request, 'accounts/reset.html', locals())
+    reset_form = forms.ResetForm()
+    return render(request, 'accounts/reset.html', locals())
