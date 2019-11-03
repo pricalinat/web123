@@ -320,7 +320,7 @@ def reset_pwd(request):
             user.password = hash_code(new_password)
             user.save()
             confirm.delete()
-            message = '修改成功！'
+            message = '修改成功！' #
             return render(request, 'accounts/confirm.html', locals())
 
         else:
