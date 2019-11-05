@@ -20,6 +20,7 @@ class Challenges(models.Model):
     point = models.IntegerField(default=0)
     file = models.FileField(null=True, blank=True, upload_to=get_upload_path)
     flag = models.CharField(max_length=100)
+    scene = models.CharField(default=None, max_length=100)
     solver = models.ManyToManyField(account_models.User,
                                     blank=True,
                                     default=None)

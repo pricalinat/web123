@@ -20,13 +20,13 @@ def index(request):
     data_web = []
     for c in challenge:
         if c.category == 0:     # re
-            re = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id)
+            re = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene)
             data_re.append(re)
         elif c.category == 2:   # pwn
-            p = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id)
+            p = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene)
             data_pwn.append(p)
         elif c.category == 1:   # web
-            w = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id)
+            w = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene)
             data_web.append(w)
     return render(request, 'challenges_list.html', locals())
 
@@ -39,8 +39,9 @@ class PassInsideView():
     file = ''
     flag = ''
     id = ''
+    scene = ''
 
-    def __init__(self, name, category, message, point, file, flag, id):
+    def __init__(self, name, category, message, point, file, flag, id, scene):
         self.name = name
         self.category = category
         self.message = message
@@ -48,6 +49,7 @@ class PassInsideView():
         self.file = file
         self.flag = flag
         self.id = id
+        self.scene = scene
 
 
 def solve(request, challenge_id):

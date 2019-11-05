@@ -132,6 +132,7 @@
                                         {% else %}
                                             暂无
                                         {% endif %}
+                                        <p><b>Scene: </b><a href="{{mission.scene}}" target="_blank">{{ mission.scene }}</a></p>
                                         {% if mission.file %}
                                             <p><b>File:</b> <a href="uploads/{{ mission.file }}">download</a></p>
                                         {% endif %}
