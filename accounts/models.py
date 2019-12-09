@@ -2,6 +2,11 @@ from django.db import models
 
 
 # Create your models here.
+# def get_challenges():
+#     from challenges.models import Challenges
+#     return Challenges
+
+
 class User(models.Model):
     name = models.CharField(max_length=10, unique=True)
     password = models.CharField(max_length=256)
@@ -17,8 +22,8 @@ class User(models.Model):
     )
     point = models.IntegerField(default=0)
     has_confirmed = models.BooleanField(default=False)
-
-    # solved_challenges = models.Many ToManyField("Challenges") # 多对多
+    # Challenges = get_challenges()
+    # collections = models.ManyToManyField(Challenges)  # 多对多
 
     def __str__(self):
         return self.name
@@ -46,7 +51,6 @@ class ConfirmString(models.Model):
         return self.user.name + ":   " + self.code
 
     class Meta:
-
         ordering = ["-c_time"]
         verbose_name = "confirm_code"
         verbose_name_plural = "confirm_code"
@@ -66,9 +70,10 @@ class Team(models.Model):
     class Meta:
         ordering = ['-point']
 
+
 class Suggestion(models.Model):
     user_name = models.CharField(max_length=4, default=None)
     suggestion = models.CharField(max_length=100, default=None)
 
     def __str__(self):
-        return '来自'+self.user_name
+        return '来自' + self.user_name

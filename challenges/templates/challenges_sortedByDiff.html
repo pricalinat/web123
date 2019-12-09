@@ -52,11 +52,11 @@
                <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-nav-first">
                          <li><a href="#home" class="smoothScroll">Home</a></li>
-                         <li><a href="#re" class="smoothScroll">Re</a></li>
-                         <li><a href="#pwn" class="smoothScroll">Pwn</a></li>
-                         <li><a href="#web" class="smoothScroll">Web</a></li>
+                         <li><a href="#low" class="smoothScroll">Low</a></li>
+                         <li><a href="#medium" class="smoothScroll">Medium</a></li>
+                         <li><a href="#high" class="smoothScroll">high</a></li>
                          <li><a href="/challenges/collection/" class="smoothScroll">Collection</a></li>
-                         <li><a href="/challenges/sortedByDif/" class="smoothScroll">Switch</a></li>
+                         <li><a href="/challenges/" class="smoothScroll">Switch</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
@@ -77,33 +77,47 @@
                     <div class="col-md-offset-1 col-md-5 col-sm-12">
                          <h2>Welcome to MyCTF!</h2>
                     </div>
-                    
+
                </div>
           </div>
      </section>
 
 
      <!-- BLOG DETAIL -->
-     <section id="re" data-stellar-background-ratio="0.5">
+     <section id="low" data-stellar-background-ratio="0.5">
           <div class="container">
                <div class="row"><br>
                     <div class="col-md-12 col-sm-12">
                          <div class="section-title">
-                              <h2>Re</h2>
+                              <h2>Low</h2>
                               <span class="line-bar">...</span>
                          </div>
                     </div>
-                    {% if data_re %}
-                        {% for mission in data_re %}
+                    {% if data_low %}
+                        {% for mission in data_low %}
                             <div class="col-md-4 col-sm-6">
                             {% if mission.is_solved == 1  %}
                                 <div class="solved_mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
                                 <p style="color:white;">{{ mission.name }}</p>
+                                {% if mission.category == 0 %}
+                                    <span style="color:white;font-size: 14px;">（reverse）</span>
+                                {% elif mission.category == 1 %}
+                                    <span style="color:white;font-size: 14px;">（pwn）</span>
+                                {% elif mission.category == 2 %}
+                                    <span style="color:white;font-size: 14px;">（web）</span>
+                                {% endif %}
                                 <p style="color:white;">{{ mission.point }}</p>
                                 </div>
                             {% else %}
                                 <div class="mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
                                     <p style="color:white;">{{ mission.name }}</p>
+                                    {% if mission.category == 0 %}
+                                    <span style="color:white;font-size: 14px;">（reverse）</span>
+                                    {% elif mission.category == 1 %}
+                                        <span style="color:white;font-size: 14px;">（pwn）</span>
+                                    {% elif mission.category == 2 %}
+                                        <span style="color:white;font-size: 14px;">（web）</span>
+                                    {% endif %}
                                     <p style="color:white;">{{ mission.point }}</p>
                                 </div>
                             {% endif %}
@@ -173,27 +187,41 @@
           </div>
      </section>
 
-     <section id="pwn" data-stellar-background-ratio="0.5" style="background-color: #ddfffc">
+     <section id="medium" data-stellar-background-ratio="0.5" style="background-color: #ddfffc">
           <div class="container">
                <div class="row"><br>
                     <div class="col-md-12 col-sm-12">
                          <div class="section-title">
-                              <h2>Pwn</h2>
+                              <h2>Medium</h2>
                               <span class="line-bar">...</span>
                          </div>
                     </div>
 
-                    {% if  data_pwn%}
-                    {% for mission in data_pwn %}
+                    {% if  data_medium%}
+                    {% for mission in data_medium %}
                         <div class="col-md-4 col-sm-6">
                             {% if mission.is_solved == 1  %}
                                 <div class="solved_mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
                                 <p style="color:white;">{{ mission.name }}</p>
+                                {% if mission.category == 0 %}
+                                    <span style="color:white;font-size: 14px;">（reverse）</span>
+                                {% elif mission.category == 1 %}
+                                    <span style="color:white;font-size: 14px;">（pwn）</span>
+                                {% elif mission.category == 2 %}
+                                    <span style="color:white;font-size: 14px;">（web）</span>
+                                {% endif %}
                                 <p style="color:white;">{{ mission.point }}</p>
                                 </div>
                             {% else %}
                                 <div class="mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
                                     <p style="color:white;">{{ mission.name }}</p>
+                                    {% if mission.category == 0 %}
+                                    <span style="color:white;font-size: 14px;">（reverse）</span>
+                                    {% elif mission.category == 1 %}
+                                        <span style="color:white;font-size: 14px;">（pwn）</span>
+                                    {% elif mission.category == 2 %}
+                                        <span style="color:white;font-size: 14px;">（web）</span>
+                                    {% endif %}
                                     <p style="color:white;">{{ mission.point }}</p>
                                 </div>
                             {% endif %}
@@ -265,26 +293,40 @@
           </div>
      </section>
 
-     <section id="web" data-stellar-background-ratio="0.5">
+     <section id="high" data-stellar-background-ratio="0.5">
           <div class="container">
                <div class="row">
                <div class="col-md-12 col-sm-12">
                  <div class="section-title">
-                      <h2>Web</h2>
+                      <h2>High</h2>
                       <span class="line-bar">...</span>
                  </div>
             </div>
-                    {% if data_web %}
-                    {% for mission in data_web %}
+                    {% if data_high %}
+                    {% for mission in data_high %}
                         <div class="col-md-4 col-sm-6">
-                            {% if mission.is_solved == 1 %}
+                            {% if mission.is_solved == 1  %}
                                 <div class="solved_mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
                                 <p style="color:white;">{{ mission.name }}</p>
+                                {% if mission.category == 0 %}
+                                    <span style="color:white;font-size: 14px;">（reverse）</span>
+                                {% elif mission.category == 1 %}
+                                    <span style="color:white;font-size: 14px;">（pwn）</span>
+                                {% elif mission.category == 2 %}
+                                    <span style="color:white;font-size: 14px;">（web）</span>
+                                {% endif %}
                                 <p style="color:white;">{{ mission.point }}</p>
                                 </div>
                             {% else %}
                                 <div class="mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
                                     <p style="color:white;">{{ mission.name }}</p>
+                                    {% if mission.category == 0 %}
+                                    <span style="color:white;font-size: 14px;">（reverse）</span>
+                                    {% elif mission.category == 1 %}
+                                        <span style="color:white;font-size: 14px;">（pwn）</span>
+                                    {% elif mission.category == 2 %}
+                                        <span style="color:white;font-size: 14px;">（web）</span>
+                                    {% endif %}
                                     <p style="color:white;">{{ mission.point }}</p>
                                 </div>
                             {% endif %}

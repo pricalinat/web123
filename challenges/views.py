@@ -23,24 +23,36 @@ def index(request):
     for c in challenge:
         if c.category == 0:  # re
             is_solved = 0
+            is_collected = 0
             solver = c.solver.all()
+            collector = c.collector.all()
             if current_user in solver:
                 is_solved = 1
-            re = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved)
+            if current_user in collector:
+                is_collected = 1
+            re = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved, is_collected)
             data_re.append(re)
         elif c.category == 2:  # pwn
             is_solved = 0
+            is_collected = 0
             solver = c.solver.all()
+            collector = c.collector.all()
             if current_user in solver:
                 is_solved = 1
-            p = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved)
+            if current_user in collector:
+                is_collected = 1
+            p = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved, is_collected)
             data_pwn.append(p)
         elif c.category == 1:  # web
             is_solved = 0
+            is_collected = 0
             solver = c.solver.all()
+            collector = c.collector.all()
             if current_user in solver:
                 is_solved = 1
-            w = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved)
+            if current_user in collector:
+                is_collected = 1
+            w = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved, is_collected)
             data_web.append(w)
     return render(request, 'challenges_list.html', locals())
 
@@ -55,8 +67,9 @@ class PassInsideView():
     id = ''
     scene = ''
     is_solved = ''
+    is_collected = ''
 
-    def __init__(self, name, category, message, point, file, flag, id, scene, is_solved):
+    def __init__(self, name, category, message, point, file, flag, id, scene, is_solved, is_collected):
         self.name = name
         self.category = category
         self.message = message
@@ -66,14 +79,15 @@ class PassInsideView():
         self.id = id
         self.scene = scene
         self.is_solved = is_solved
+        self.is_collected = is_collected
 
 
-def solve(request, challenge_id):
-    if not request.session.get('is_login', None):
-        return redirect('/accounts/login/')
-    challenge = models.Challenges.objects.get(id=challenge_id)
-    user_id = accounts_models.User.id
-    return render(request, 'solve.html', locals())
+# def solve(request, challenge_id):
+#     if not request.session.get('is_login', None):
+#         return redirect('/accounts/login/')
+#     challenge = models.Challenges.objects.get(id=challenge_id)
+#     user_id = accounts_models.User.id
+#     return render(request, 'solve.html', locals())
 
 
 class IndexView(View):
@@ -106,6 +120,7 @@ class IndexView(View):
                 challenge.solver.add(solver)
                 current_user.point += challenge.point  #
                 current_user.save()
+                challenge.save()
                 try:
                     team = current_user.team
                     team.point += challenge.point
@@ -151,3 +166,113 @@ class IndexView(View):
         #             return HttpResponse(response)
         # else:
         #     return HttpResponse('fail')
+def collect(request, challenge_id):
+    if not request.session.get('is_login', None):
+        return redirect('/accounts/login/')
+    challenge = models.Challenges.objects.get(id=challenge_id)
+    current_id = request.session['user_id']
+    current_user = accounts_models.User.objects.get(id=current_id)
+    if challenge.collector.filter(id=current_id).exists():
+        challenge.collector.remove(current_user)
+        challenge.save()
+        response = '<strong id="collect_already"><p>取消成功</p></strong>'
+        return HttpResponse(response)
+    else:
+        challenge.collector.add(current_user)
+        challenge.save()
+        response = '<strong id="collect_ok"><p>收藏成功</p></strong>'
+        return HttpResponse(response)
+
+def collection(request):
+    if not request.session.get('is_login', None):
+        return redirect('/accounts/login/')
+    current_id = request.session['user_id']
+    current_user = accounts_models.User.objects.get(id=current_id)
+    challenge = models.Challenges.objects.order_by("point")
+    data_re = []
+    data_pwn = []
+    data_web = []
+    for c in challenge:
+        if c.category == 0 and c.collector.filter(id=current_id).exists():  # re
+            is_solved = 0
+            is_collected = 0
+            solver = c.solver.all()
+            collector = c.collector.all()
+            if current_user in solver:
+                is_solved = 1
+            if current_user in collector:
+                is_collected = 1
+            re = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved,
+                                is_collected)
+            data_re.append(re)
+        elif c.category == 2 and c.collector.filter(id=current_id).exists():  # pwn
+            is_solved = 0
+            is_collected = 0
+            solver = c.solver.all()
+            collector = c.collector.all()
+            if current_user in solver:
+                is_solved = 1
+            if current_user in collector:
+                is_collected = 1
+            p = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved,
+                               is_collected)
+            data_pwn.append(p)
+        elif c.category == 1 and c.collector.filter(id=current_id).exists():  # web
+            is_solved = 0
+            is_collected = 0
+            solver = c.solver.all()
+            collector = c.collector.all()
+            if current_user in solver:
+                is_solved = 1
+            if current_user in collector:
+                is_collected = 1
+            w = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved,
+                               is_collected)
+            data_web.append(w)
+    return render(request, 'challenges_list.html', locals())
+
+def sortedByDif(request):
+    if not request.session.get('is_login', None):
+        return redirect('/accounts/login/')
+    # challenge = models.Challenges.objects.all()
+    current_id = request.session['user_id']
+    current_user = accounts_models.User.objects.get(id=current_id)
+    challenge = models.Challenges.objects.order_by("point")
+    data_low = []
+    data_medium = []
+    data_high = []
+    for c in challenge:
+        if c.point<100:  # re
+            is_solved = 0
+            is_collected = 0
+            solver = c.solver.all()
+            collector = c.collector.all()
+            if current_user in solver:
+                is_solved = 1
+            if current_user in collector:
+                is_collected = 1
+            low = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved, is_collected)
+            data_low.append(low)
+        elif c.point<200:  # pwn
+            is_solved = 0
+            is_collected = 0
+            solver = c.solver.all()
+            collector = c.collector.all()
+            if current_user in solver:
+                is_solved = 1
+            if current_user in collector:
+                is_collected = 1
+            medium = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved, is_collected)
+            data_medium.append(medium)
+        elif c.point>=200:  # web
+            is_solved = 0
+            is_collected = 0
+            solver = c.solver.all()
+            collector = c.collector.all()
+            if current_user in solver:
+                is_solved = 1
+            if current_user in collector:
+                is_collected = 1
+            high = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved, is_collected)
+            data_high.append(high)
+    return render(request, 'challenges_sortedByDiff.html', locals())

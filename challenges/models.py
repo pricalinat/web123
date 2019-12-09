@@ -1,5 +1,5 @@
 from django.db import models
-from accounts import models as account_models
+from accounts.models import User
 import hashlib
 
 
@@ -21,9 +21,14 @@ class Challenges(models.Model):
     file = models.FileField(null=True, blank=True, upload_to=get_upload_path)
     flag = models.CharField(max_length=100)
     scene = models.CharField(default=None, max_length=100)
-    solver = models.ManyToManyField(account_models.User,
+    solver = models.ManyToManyField(User,
                                     blank=True,
-                                    default=None)
+                                    default=None,
+                                    related_name='solve')
+    collector = models.ManyToManyField(User,
+                                    blank=True,
+                                    default=None,
+                                    related_name='collect')
 
     class Meta:
         verbose_name = 'challenge'
