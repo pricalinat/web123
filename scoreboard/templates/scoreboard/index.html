@@ -1,35 +1,377 @@
-{% extends 'navigationbar.html' %}
 {% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
 
-{% block title %}
-	<title>总排行榜</title>
-{% endblock %}
+     <title>Rank</title>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-{% block customcss %}
-{#   <link href="{% static 'teams/css/team_list.css' %}" rel="stylesheet" />#}
-{% endblock %}
+     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 
-{% block custombody %}
-{#    {% if message %}#}
-{#      <div class="alert alert-warning">{{ message }}</div>#}
-{#    {% endif %}#}
-    <div class="table-responsive">
-    <table class="table table-striped table-hover">
-    <tr>
-     <th>No.</th>
-     <th class="col-lg-pull-4">姓名</th>
-{#     <th>解题数量</th>#}
-     <th>积分</th>
-    </tr>
-        {% for user in users %}
-        <tr>
-            <td class="form-control-static">{{forloop.counter}}</td>
-            <td style="font-size:20px">{{ user.name }}</td>
-            <td>{{user.point}}</td>
-        </tr>
-        {% endfor %}
-    </table>
-   </div>
+     <!-- MAIN CSS -->
+     <link rel="stylesheet" href="{% static 'css/templatemo-style.css' %}">
+</head>
+<body>
 
-{% endblock %}
+     <!-- PRE LOADER -->
+     <section class="preloader">
+          <div class="spinner">
+               <span class="spinner-rotate"></span>
+          </div>
+     </section>
 
+
+     <!-- MENU -->
+     <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
+          <div class="container">
+
+               <div class="navbar-header">
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                    </button>
+
+                    <!-- lOGO TEXT HERE -->
+                    <a href="/accounts/" class="navbar-brand">MyCTF</a>
+               </div>
+
+               <!-- MENU LINKS -->
+               <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-nav-first">
+                         <li><a href="#home" class="smoothScroll">Home</a></li>
+                         <li><a href="#person" class="smoothScroll">Personal</a></li>
+                         <li><a href="#team" class="smoothScroll">Team</a></li>
+                         <li><a href="#web" class="smoothScroll">Web</a></li>
+                         <li><a href="#pwn" class="smoothScroll">Pwn</a></li>
+                         <li><a href="#re" class="smoothScroll">Re</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                         <li class="section-btn"><a href="/accounts/logout/" >Logout</a></li>
+                    </ul>
+               </div>
+
+          </div>
+     </section>
+
+
+     <!-- BLOG HEADER -->
+     <section id="blog-header" data-stellar-background-ratio="0.5">
+          <div class="overlay"></div>
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-offset-1 col-md-5 col-sm-12">
+                         <h2>Welcome to MyCTF!</h2>
+                    </div>
+                    
+               </div>
+          </div>
+     </section>
+
+
+     <!-- BLOG DETAIL -->
+     <section id="person" data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                              <table width="90%" class="table">
+                                   <caption>
+                                        <h2>Personal Rank</h2>
+                                   </caption>
+                                   <thead >
+                                   <tr>
+                                        <th>No.</th>
+                                        <th>Team</th>
+                                        <th>Point</th>
+                                   </tr>
+                                   </thead>
+                                   {% for user in users %}
+                                    <tr>
+                                        <td class="form-control-static">{{forloop.counter}}</td>
+                                        <td style="font-size:20px">{{ user.name }}</td>
+                                        <td>{{user.point}}</td>
+                                    </tr>
+                                    {% endfor %}
+
+                              </table>
+                    </div>
+               </div>
+          </div>
+     </section>
+
+     <section id="team" data-stellar-background-ratio="0.5" style="background-color: #f4fcff">
+          <div class="container">
+               <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                         <table width="90%" class="table">
+                              <caption>
+                                   <h2>Team Rank</h2>
+                              </caption>
+                              <thead >
+                              <tr>
+                                   <th>No.</th>
+                                   <th>Team Name</th>
+                                   <th>Point</th>
+                              </tr>
+                              </thead>
+                              {% for team in teams %}
+                                <tr>
+                                    <td class="form-control-static">{{forloop.counter}}</td>
+                                    <td style="font-size:20px">{{ team.team_name }}</td>
+                                    <td>{{team.point}}</td>
+                                </tr>
+                                {% endfor %}
+                         </table>
+                    </div>
+               </div>
+          </div>
+     </section>
+
+     <section id="web" data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                         <table width="90%" class="table">
+                              <caption>
+                                   <h2>Web Rank</h2>
+                              </caption>
+                              <thead >
+                              <tr>
+                                   <th>Team</th>
+                                   <th>Number</th>
+                                   <th>Point</th>
+                              </tr>
+                              </thead>
+                              <tr>
+                                   <td>109</td>
+                                   <td>13</td>
+                                   <td>1.34</td>
+                              </tr>
+                              <tr>
+                                   <td>109</td>
+                                   <td>109</td>
+                                   <td>109</td>
+
+                              </tr>
+                              <tr>
+                                   <td>111</td>
+                                   <td>111</td>
+                                   <td>111</td>
+                              </tr>
+                         </table>
+                    </div>
+               </div>
+          </div>
+     </section>
+
+     <section id="pwn" data-stellar-background-ratio="0.5" style="background-color: #f4fcff">
+          <div class="container">
+               <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                         <table width="90%" class="table">
+                              <caption>
+                                   <h2>Pwn Rank</h2>
+                              </caption>
+                              <thead >
+                              <tr>
+                                   <th>Team</th>
+                                   <th>Number</th>
+                                   <th>Point</th>
+                              </tr>
+                              </thead>
+                              <tr>
+                                   <td>109</td>
+                                   <td>13</td>
+                                   <td>1.34</td>
+                              </tr>
+                              <tr>
+                                   <td>109</td>
+                                   <td>109</td>
+                                   <td>109</td>
+
+                              </tr>
+                              <tr>
+                                   <td>111</td>
+                                   <td>111</td>
+                                   <td>111</td>
+                              </tr>
+                         </table>
+                    </div>
+               </div>
+          </div>
+     </section>
+
+     <section id="re" data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                         <table width="90%" class="table">
+                              <caption>
+                                   <h2>Re Rank</h2>
+                              </caption>
+                              <thead >
+                              <tr>
+                                   <th>Team</th>
+                                   <th>Number</th>
+                                   <th>Point</th>
+                              </tr>
+                              </thead>
+                              <tr>
+                                   <td>109</td>
+                                   <td>13</td>
+                                   <td>1.34</td>
+                              </tr>
+                              <tr>
+                                   <td>109</td>
+                                   <td>109</td>
+                                   <td>109</td>
+
+                              </tr>
+                              <tr>
+                                   <td>111</td>
+                                   <td>111</td>
+                                   <td>111</td>
+                              </tr>
+                         </table>
+                    </div>
+               </div>
+          </div>
+     </section>
+
+     <!-- FOOTER -->
+     <footer data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-5 col-sm-12">
+                         <div class="footer-thumb footer-info">
+                              <h2>MyCTF</h2>
+                              <p>CTF (Capture The Flag) is originated in the 1996 DEFCON Global Hacking Conference, a competitive game among cybersecurity enthusiasts.</p>
+                         </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-4">
+                         <div class="footer-thumb">
+                              <h2>Rank</h2>
+                              <ul class="footer-link">
+                                   <li><a href="/scoreboard/">Personal</a></li>
+                                   <li><a href="/scoreboard/">Team</a></li>
+                                   <li><a href="/scoreboard">Challenge</a></li>
+                              </ul>
+                         </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-4">
+                         <div class="footer-thumb">
+                              <h2>Challenge</h2>
+                              <ul class="footer-link">
+                                   <li><a href="/challenges/">Pwn</a></li>
+                                   <li><a href="/challenges/">Web</a></li>
+                                   <li><a href="/challenges/">Re</a></li>
+                              </ul>
+                         </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-4">
+                         <div class="footer-link">
+                              <h2>Team</h2>
+                              <li><a href="/teams/">Create</a></li>
+                              <li><a href="/teams/">Join</a></li>
+                         </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                         <div class="footer-bottom">
+                              <div class="col-md-6 col-sm-5">
+                                   <div class="copyright-text">
+                                        <p>Copyright &copy; 2019 MyCTF</p>
+                                   </div>
+                              </div>
+                              <div class="col-md-6 col-sm-7">
+                                   <div class="phone-contact">
+                                        <p>Call us <span>15632721215</span></p>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+
+               </div>
+          </div>
+     </footer>
+
+
+     <!-- MODAL -->
+     <section class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+               <div class="modal-content modal-popup">
+
+                    <div class="modal-header">
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                         </button>
+                    </div>
+
+                    <div class="modal-body">
+                         <div class="container-fluid">
+                              <div class="row">
+
+                                   <div class="col-md-12 col-sm-12">
+                                        <div class="modal-title">
+                                             <h2>MyCTF</h2>
+                                        </div>
+
+                                        <!-- NAV TABS -->
+                                        <ul class="nav nav-tabs" role="tablist">
+                                             <li class="active"><a href="#sign_up" aria-controls="sign_up" role="tab" data-toggle="tab">Create an account</a></li>
+                                             <li><a href="#sign_in" aria-controls="sign_in" role="tab" data-toggle="tab">Sign In</a></li>
+                                        </ul>
+
+                                        <!-- TAB PANES -->
+                                        <div class="tab-content">
+                                             <div role="tabpanel" class="tab-pane fade in active" id="sign_up">
+                                                  <form action="#" method="post">
+                                                       <input type="text" class="form-control" name="name" placeholder="Name" required>
+                                                       <input type="telephone" class="form-control" name="telephone" placeholder="Telephone" required>
+                                                       <input type="email" class="form-control" name="email" placeholder="Email" required>
+                                                       <input type="password" class="form-control" name="password" placeholder="Password" required>
+                                                       <input type="submit" class="form-control" name="submit" value="Submit Button">
+                                                  </form>
+                                             </div>
+
+                                             <div role="tabpanel" class="tab-pane fade in" id="sign_in">
+                                                  <form action="#" method="post">
+                                                       <input type="email" class="form-control" name="email" placeholder="Email" required>
+                                                       <input type="password" class="form-control" name="password" placeholder="Password" required>
+                                                       <input type="submit" class="form-control" name="submit" value="Submit Button">
+                                                       <a href="https://www.facebook.com/templatemo">Forgot your password?</a>
+                                                  </form>
+                                             </div>
+                                        </div>
+                                   </div>
+
+                              </div>
+                         </div>
+                    </div>
+
+               </div>
+          </div>
+     </section>
+
+     <!-- SCRIPTS -->
+     <script src="{%static 'js/jquery.js' %}"></script>
+     <script src="{%static 'js/bootstrap.min.js' %}"></script>
+     <script src="{%static 'js/jquery.stellar.min.js' %}"></script>
+     <script src="{%static 'js/jquery.magnific-popup.min.js' %}"></script>
+     <script src="{%static 'js/smoothscroll.js' %}"></script>
+     <script src="{%static 'js/custom.js' %}"></script>
+
+</body>
+</html>

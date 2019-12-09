@@ -1,38 +1,182 @@
-{% extends 'navigationbar.html' %}
-
 {% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+     <title>Change-password</title>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 
-{% block title %}
-	<title>reset password</title>
-{% endblock %}
+     <!-- MAIN CSS -->
+     <link rel="stylesheet" href="{% static 'css/templatemo-style.css' %}">
+</head>
+<body>
 
-{% block custombody %}
-  <div class="container">
-    <div class="col-md-3"></div>
-            <div class="col-md-6">
-              <form class="form-login" action="/accounts/reset/?code={{ code }}" method="post">
+     <!-- PRE LOADER -->
+     <section class="preloader">
+          <div class="spinner">
+               <span class="spinner-rotate"></span>
+          </div>
+     </section>
 
-                  {% if message %}
-                      <div class="alert alert-warning">{{ message }}</div>
-                  {% endif %}
 
-                  {% csrf_token %}
+     <!-- MENU -->
+     <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
+          <div class="container">
 
-                  <h3 class="text-center">重置密码</h3>
+               <div class="navbar-header">
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                    </button>
 
-                  <div class="form-group">
-                      {{ reset_form.new_password.label_tag }}
-                      {{ reset_form.new_password }}
-                  </div>
-                  <div class="form-group">
-                      {{ reset_form.confirm_password.label_tag }}
-                      {{ reset_form.confirm_password }}
-                  </div>
-                  <div>
+                    <!-- lOGO TEXT HERE -->
+                    <a href="/accounts/" class="navbar-brand">MyCTF</a>
+               </div>
 
-                  <button type="submit" class="btn btn-primary float-left">保存</button>
-                </div>
-              </form>
-            </div>
-  </div> <!-- /container -->
-{% endblock %}
+               <!-- MENU LINKS -->
+               <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-nav-first">
+                         <li><a href="#home" class="smoothScroll">Home</a></li>
+                    </ul>
+
+{#                    <ul class="nav navbar-nav navbar-right">#}
+{#                         <li class="section-btn"><a href="/accounts/logout/" >Logout</a></li>#}
+{#                    </ul>#}
+               </div>
+
+          </div>
+     </section>
+
+
+     <!-- BLOG HEADER -->
+     <section id="blog-header" data-stellar-background-ratio="0.5">
+          <div class="overlay"></div>
+          <div class="container" style="width: 600px">
+               <div class="modal-content modal-popup">
+
+                    <div class="modal-body" style="   background: #000000;
+    background: -webkit-linear-gradient(to right, #434343, #000000);
+    background: linear-gradient(to right, #434343, #000000);
+    border: none;
+    border-radius: 2px;
+    text-align: center;
+    position: relative;
+    padding: 2em;">
+                         <div class="container-fluid">
+                              <div class="row">
+                                   <div class="col-md-12 col-sm-12">
+                                        <div class="modal-title">
+                                             <h2>Change password</h2>
+                                        </div>
+                                        <!-- NAV TABS -->
+
+                                        <!-- TAB PANES -->
+                                        <div class="tab-content" style="padding-top: 20px;">
+                                             <div role="tabpanel" class="tab-pane fade in active" id="sign_up">
+                                                  <form action="/accounts/reset/?code={{ code }}" method="post">
+                                                          {% if message %}
+                                                              <div class="alert alert-warning">{{ message }}</div>
+                                                          {% endif %}
+
+                                                          {% csrf_token %}
+
+                                                      <div class="form-group">
+                                                          {{ reset_form.new_password.label_tag }}
+                                                          {{ reset_form.new_password }}
+                                                      </div>
+                                                      <div class="form-group">
+                                                          {{ reset_form.confirm_password.label_tag }}
+                                                          {{ reset_form.confirm_password }}
+                                                      </div>
+                                                       <input type="submit" class="section-btn" name="submit" value="Change">
+                                                  </form>
+                                             </div>
+
+                                        </div>
+                                   </div>
+
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </section>
+
+
+     <!-- FOOTER -->
+     <footer data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-5 col-sm-12">
+                         <div class="footer-thumb footer-info">
+                              <h2>MyCTF</h2>
+                              <p>CTF (Capture The Flag) is originated in the 1996 DEFCON Global Hacking Conference, a competitive game among cybersecurity enthusiasts.</p>
+                         </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-4">
+                         <div class="footer-thumb">
+                              <h2>Rank</h2>
+                              <ul class="footer-link">
+                                   <li><a href="/scoreboard/">Personal</a></li>
+                                   <li><a href="/scoreboard/">Team</a></li>
+                                   <li><a href="/scoreboard/">Challenge</a></li>
+                              </ul>
+                         </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4">
+                         <div class="footer-thumb">
+                              <h2>Challenge</h2>
+                              <ul class="footer-link">
+                                   <li><a href="/challenges/">Pwn</a></li>
+                                   <li><a href="/challenges/">Web</a></li>
+                                   <li><a href="/challenges/">Re</a></li>
+                              </ul>
+                         </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4">
+                         <div class="footer-link">
+                              <h2>Team</h2>
+                              <li><a href="/teams/">Create</a></li>
+                              <li><a href="/teams/">Join</a></li>
+                         </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                         <div class="footer-bottom">
+                              <div class="col-md-6 col-sm-5">
+                                   <div class="copyright-text">
+                                        <p>Copyright &copy; 2019 MyCTF</p>
+                                   </div>
+                              </div>
+                              <div class="col-md-6 col-sm-7">
+                                   <div class="phone-contact">
+                                        <p>Call us <span>15632721215</span></p>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+
+               </div>
+          </div>
+     </footer>
+
+
+     <!-- SCRIPTS -->
+     <script src="{%static 'js/jquery.js' %}"></script>
+     <script src="{%static 'js/bootstrap.min.js' %}"></script>
+     <script src="{%static 'js/jquery.stellar.min.js' %}"></script>
+     <script src="{%static 'js/jquery.magnific-popup.min.js' %}"></script>
+     <script src="{%static 'js/smoothscroll.js' %}"></script>
+     <script src="{%static 'js/custom.js' %}"></script>
+
+</body>
+</html>

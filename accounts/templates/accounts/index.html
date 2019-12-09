@@ -1,25 +1,400 @@
-{% extends 'navigationbar.html' %}
-
 {% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
 
-{% block title %}
-	<title>MyCTF</title>
-{% endblock %}
+     <title>Home</title>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-{% block customcss %}
-{#	<link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">#}
-    <link href="{% static 'accounts/css/index.css' %}" rel="stylesheet" />
-{% endblock %}
+     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 
-{% block custombody %}
+     <!-- MAIN CSS -->
+     <link rel="stylesheet" href="{% static 'css/templatemo-style.css' %}">
+</head>
+<body>
 
-<div class="col-md-4"></div>
-<div class="note col-md-4">
-    <div class="ctf_logo ">
-        <img src="/static/logo.svg" class="img_logo" alt="">
-    </div>
-    <br>
-    <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur autem blanditiis cupiditate distinctio dolor eaque earum eveniet harum in, incidunt odit quaerat quasi quisquam reiciendis similique sint ullam ut voluptatum!</small>
-</div>
-<div class="col-md-4"></div>
-{% endblock %}
+     <!-- PRE LOADER -->
+     <section class="preloader">
+          <div class="spinner">
+               <span class="spinner-rotate"></span>
+          </div>
+     </section>
+
+
+     <!-- MENU -->
+     <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
+          <div class="container">
+
+               <div class="navbar-header">
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                    </button>
+
+                    <!-- lOGO TEXT HERE -->
+                    <a href="/accounts/" class="navbar-brand">MyCTF</a>
+               </div>
+
+               <!-- MENU LINKS -->
+               <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-nav-first">
+                         <li><a href="#home" class="smoothScroll">Home</a></li>
+                         <li><a href="#about" class="smoothScroll">Team</a></li>
+                         <li><a href="#blog" class="smoothScroll">Challenge</a></li>
+                         <li><a href="#work" class="smoothScroll">Rank</a></li>
+                         <li><a href="/accounts/profile/" class="smoothScroll">Profile</a></li>
+                         <li><a href="#contact" class="smoothScroll">Suggestions</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                         {% if request.session.is_login %}
+                         <li class="section-btn"><a href="/accounts/logout/">Logout</a></li>
+                         {% else %}
+                         <li class="section-btn"><a href="/accounts/login/">Sign in / Join</a></li>
+                         {% endif %}
+                    </ul>
+               </div>
+     {% if message %}
+          <div class="alert alert-warning">{{ message }}</div>
+     {% endif %}
+
+          </div>
+     </section>
+
+
+     <!-- HOME -->
+     <section id="home" data-stellar-background-ratio="0.5">
+          <div class="overlay"></div>
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-6 col-sm-12">
+                         <div class="home-info">
+                              <h1>We are committed to providing a practical CTF website.</h1>
+                              <a href="#about" class="btn section-btn smoothScroll">More details</a>
+                              <span>
+                                   Any questions?
+                                   <small>CALL US 15632721215</small>
+                              </span>
+                         </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                         <div class="home-video">
+                              <div class="embed-responsive embed-responsive-16by9">
+                                  <img src="{% static 'images/logo.png' %}" alt="" height="350">
+                              </div>
+                    </div>
+                    </div>
+
+               </div>
+          </div>
+     </section>
+
+
+     <!-- ABOUT -->
+     <section id="about" data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-5 col-sm-6">
+                         <div class="about-info">
+                              <div class="section-title">
+                                   <h2>Team</h2>
+                                   <span class="line-bar">...</span>
+                              </div>
+                              <p>Our website supports group cooperation. You can challenge with your friends.</p>
+                              <p>Of course, if you believe that your ability is strong enough, we also welcome you to fight alone.</p>
+                         </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6">
+                         <div class="about-info skill-thumb">
+                              <strong>Member one</strong>
+
+                                        <div class="progress">
+                                             <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%;"></div>
+                                        </div>
+                              <strong>Member two</strong>
+                                        <div class="progress">
+                                             <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
+                                        </div>
+                              <strong>Member three</strong>
+                                        <div class="progress">
+                                             <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div>
+                                        </div>
+
+                         </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12">
+                         <div>
+                              <h2>You still have no team?</h2>
+                              <br>
+                              <a href="/teams/" class="btn section-btn smoothScroll">Create/Join others</a> <span></span>
+                         </div>
+                    </div>
+
+               </div>
+          </div>
+     </section>
+
+
+     <!-- BLOG -->
+     <section id="blog" data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-12 col-sm-12">
+                         <div class="section-title">
+                              <h2>Catalogue</h2>
+                              <span class="line-bar">...</span>
+                         </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                         <!-- BLOG THUMB -->
+                         <div class="media blog-thumb">
+                              <div class="media-object media-left">
+                                   <a href="/challenges/"><img src="{% static 'images/web.png' %}" class="img-responsive" alt=""></a>
+                              </div>
+                              <div class="media-body blog-info">
+                                   <small><i class="fa fa-clock-o"></i> 2019</small>
+                                   <h3><a href="/challenges/">Web</a></h3>
+                                   <p>This is a problem bank about the Web.</p>
+                                   <a href="/challenges/" class="btn section-btn">Challenge!</a>
+                              </div>
+                         </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                         <!-- BLOG THUMB -->
+                         <div class="media blog-thumb">
+                              <div class="media-object media-left">
+                                   <a href="/challenges/"><img src="{% static 'images/pwn.jpg' %}" class="img-responsive" alt=""></a>
+                              </div>
+                              <div class="media-body blog-info">
+                                   <small><i class="fa fa-clock-o"></i> 2019</small>
+                                   <h3><a href="/challenges/">Pwn</a></h3>
+                                   <p>This is a problem bank about the Pwn.</p>
+                                   <a href="/challenges#pwn " class="btn section-btn">Challenge!</a>
+                              </div>
+                         </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                         <!-- BLOG THUMB -->
+                         <div class="media blog-thumb">
+                              <div class="media-object media-left">
+                                   <br>
+                                   <br>
+                                   <a href="/challenges/"><img src="{% static 'images/re.jpg' %}" class="img-responsive" alt=""></a>
+                              </div>
+                              <div class="media-body blog-info">
+                                   <small><i class="fa fa-clock-o"></i>2019</small>
+                                   <h3><a href="/challenges/">Re</a></h3>
+                                   <p>This is a problem bank about the Re.</p>
+                                   <a href="/challenges/" class="btn section-btn">Challenge!</a>
+                              </div>
+                         </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6">
+                         <!-- BLOG THUMB -->
+                         <div class="media blog-thumb">
+                              <div class="media-object media-left">
+                                   <a href="/challenges/"><img src="{% static 'images/other.jpg' %}" class="img-responsive" alt=""></a>
+                              </div>
+                              <div class="media-body blog-info">
+                                   <small><i class="fa fa-clock-o"></i>2019</small>
+                                   <h3><a href="/challenges/">Others</a></h3>
+                                   <p>Other topics that don’t know how to classify are here.</p>
+                                   <a href="/challenges/" class="btn section-btn">Challenge!</a>
+                              </div>
+                         </div>
+                    </div>
+                    
+               </div>
+          </div>
+     </section>
+
+
+     <!-- WORK -->
+     <section id="work" data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-12 col-sm-12">
+                         <div class="section-title">
+                              <h2>Rank</h2>
+                              <span class="line-bar">...</span>
+                         </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6">
+                         <!-- WORK THUMB -->
+                         <div class="work-thumb">
+                              <a href="{% static 'images/person.jpg' %}" class="image-popup">
+                                   <img src="{% static 'images/person.jpg' %}" class="img-responsive" alt="Work">
+
+                                   <div class="work-info">
+                                        <a href="/scoreboard/"><h3>Personal</h3></a>
+                                        <small>Rank</small>
+                                   </div>
+                              </a>
+                         </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6">
+                         <!-- WORK THUMB -->
+                         <div class="work-thumb">
+                              <a href="{% static 'images/team.jpg' %}" class="image-popup">
+                                   <img src="{% static 'images/team.jpg' %}" class="img-responsive" alt="Work">
+
+                                   <div class="work-info">
+                                        <a href="/scoreboard/"><h3>Team</h3></a>
+                                        <small>Rank</small>
+                                   </div>
+                              </a>
+                         </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6">
+                         <!-- WORK THUMB -->
+                         <div class="work-thumb">
+                              <a href="{% static 'images/problem.jpg' %}" class="image-popup">
+                                   <img src="{% static 'images/problem.jpg' %}" class="img-responsive" alt="Work">
+
+                                   <div class="work-info">
+                                        <a href="/scoreboard/"><h3>Challenge</h3></a>
+                                        <small>Rank</small>
+                                   </div>
+                              </a>
+                         </div>
+                    </div>
+
+
+               </div>
+          </div>
+     </section>
+
+     <!-- CONTACT -->
+     <section id="contact" data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-12 col-sm-12">
+                         <div class="section-title">
+                              <h2>Any suggestions for improvement?</h2>
+                              <span class="line-bar">...</span>
+                         </div>
+                    </div>
+
+                    <div class="col-md-8 col-sm-8">
+                        
+                         <!-- CONTACT FORM HERE -->
+                         <form id="contact-form" role="form" action="/accounts/suggest/" method="post">
+
+                              {% csrf_token %}
+                              <div class="col-md-12 col-sm-12">
+                                   <textarea class="form-control" rows="6" placeholder="Your suggestions" id="cf-message" name="message" required=""></textarea>
+                              </div>
+
+                              <div class="col-md-4 col-sm-12">
+                                   <input type="submit" class="form-control" name="submit" value="Send Message">
+                              </div>
+
+                         </form>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                         <div class="map">
+                              <iframe src="http://api.map.baidu.com/staticimage?center=%E5%8C%97%E4%BA%AC%E9%82%AE%E7%94%B5%E5%A4%A7%E5%AD%A6(%E6%B2%99%E6%B2%B3%E6%A0%A1%E5%8C%BA)&markers=%E5%8C%97%E4%BA%AC%E9%82%AE%E7%94%B5%E5%A4%A7%E5%AD%A6(%E6%B2%99%E6%B2%B3%E6%A0%A1%E5%8C%BA)" allowfullscreen></iframe>
+                         </div>
+                    </div>
+
+               </div>
+          </div>
+     </section>
+
+
+     <!-- FOOTER -->
+     <footer data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-5 col-sm-12">
+                         <div class="footer-thumb footer-info"> 
+                              <h2>MyCTF</h2>
+                              <p>CTF (Capture The Flag) is originated in the 1996 DEFCON Global Hacking Conference, a competitive game among cybersecurity enthusiasts.</p>
+                         </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-4"> 
+                         <div class="footer-thumb"> 
+                              <h2>Rank</h2>
+                              <ul class="footer-link">
+                                   <li><a href="/scoreboard/">Personal</a></li>
+                                   <li><a href="/scoreboard/">Team</a></li>
+                                   <li><a href="/scoreboard">Challenge</a></li>
+                              </ul>
+                         </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-4"> 
+                         <div class="footer-thumb"> 
+                              <h2>Challenge</h2>
+                              <ul class="footer-link">
+                                   <li><a href="/challenges#pwn">Pwn</a></li>
+                                   <li><a href="/challenges#web">Web</a></li>
+                                   <li><a href="/challenges#re">Re</a></li>
+                              </ul>
+                         </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-4"> 
+                         <div class="footer-link">
+                              <h2>Team</h2>
+                              <li><a href="/teams/">Create</a></li>
+                              <li><a href="/teams/">Join</a></li>
+                         </div>
+                    </div>                    
+
+                    <div class="col-md-12 col-sm-12">
+                         <div class="footer-bottom">
+                              <div class="col-md-6 col-sm-5">
+                                   <div class="copyright-text"> 
+                                        <p>Copyright &copy; 2019 MyCTF</p>
+                                   </div>
+                              </div>
+                              <div class="col-md-6 col-sm-7">
+                                   <div class="phone-contact"> 
+                                        <p>Call us <span>15632721215</span></p>
+                                   </div>
+
+                              </div>
+                         </div>
+                    </div>
+                    
+               </div>
+          </div>
+     </footer>
+
+     <!-- SCRIPTS -->
+     <script src="{%static 'js/jquery.js' %}"></script>
+     <script src="{%static 'js/bootstrap.min.js' %}"></script>
+     <script src="{%static 'js/jquery.stellar.min.js' %}"></script>
+     <script src="{%static 'js/jquery.magnific-popup.min.js' %}"></script>
+     <script src="{%static 'js/smoothscroll.js' %}"></script>
+     <script src="{%static 'js/custom.js' %}"></script>
+
+</body>
+</html>

@@ -14,19 +14,33 @@ def index(request):
     if not request.session.get('is_login', None):
         return redirect('/accounts/login/')
     # challenge = models.Challenges.objects.all()
+    current_id = request.session['user_id']
+    current_user = accounts_models.User.objects.get(id=current_id)
     challenge = models.Challenges.objects.order_by("point")
     data_re = []
     data_pwn = []
     data_web = []
     for c in challenge:
-        if c.category == 0:     # re
-            re = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene)
+        if c.category == 0:  # re
+            is_solved = 0
+            solver = c.solver.all()
+            if current_user in solver:
+                is_solved = 1
+            re = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved)
             data_re.append(re)
-        elif c.category == 2:   # pwn
-            p = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene)
+        elif c.category == 2:  # pwn
+            is_solved = 0
+            solver = c.solver.all()
+            if current_user in solver:
+                is_solved = 1
+            p = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved)
             data_pwn.append(p)
-        elif c.category == 1:   # web
-            w = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene)
+        elif c.category == 1:  # web
+            is_solved = 0
+            solver = c.solver.all()
+            if current_user in solver:
+                is_solved = 1
+            w = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved)
             data_web.append(w)
     return render(request, 'challenges_list.html', locals())
 
@@ -40,8 +54,9 @@ class PassInsideView():
     flag = ''
     id = ''
     scene = ''
+    is_solved = ''
 
-    def __init__(self, name, category, message, point, file, flag, id, scene):
+    def __init__(self, name, category, message, point, file, flag, id, scene, is_solved):
         self.name = name
         self.category = category
         self.message = message
@@ -50,6 +65,7 @@ class PassInsideView():
         self.flag = flag
         self.id = id
         self.scene = scene
+        self.is_solved = is_solved
 
 
 def solve(request, challenge_id):
@@ -73,13 +89,13 @@ class IndexView(View):
         if not request.session.get('is_login', None):
             return redirect('/accounts/login/')
         # print(request.POST)
-        flag = request.POST.get(str(challenge_id)+'_flag')
+        flag = request.POST.get(str(challenge_id) + '_flag')
         # print(flag)
         challenge = models.Challenges.objects.get(id=challenge_id)
         current_id = request.session['user_id']
         current_user = accounts_models.User.objects.get(id=current_id)
         if challenge.solver.filter(id=current_id).exists():
-            response = '<div id="flag_already"><p>ALREADY SUBMITTED</p></div>'
+            response = '<strong id="flag_already"><p>ALREADY SUBMITTED</p></strong>'
             return HttpResponse(response)
         else:
             if flag == challenge.flag:
@@ -88,7 +104,7 @@ class IndexView(View):
                 if not challenge.solver.exists():
                     first_blood = 1
                 challenge.solver.add(solver)
-                current_user.point += challenge.point   #
+                current_user.point += challenge.point  #
                 current_user.save()
                 try:
                     team = current_user.team
@@ -97,14 +113,13 @@ class IndexView(View):
                 except:
                     pass
                 if first_blood == 1:
-                    response = '<div id="flag_correct"><p>FIRST BLOOD!</p></div>'
+                    response = '<strong id="flag_correct"><p >FIRST BLOOD!</p></strong>'
                 else:
-                    response = '<div id="flag_correct"><p>CORRECT</p></div>'
+                    response = '<strong id="flag_correct"><p>CORRECT</p></strong>'
                 return HttpResponse(response)
             else:
-                response = '<div id="flag_incorrect"><p>INCORRECT</p></div>'
+                response = '<h2 id="flag_incorrect" style="color:white;"><h2>INCORRECT</h2></h2> '
                 return HttpResponse(response)
-
 
         # form = flagForm(request.POST)
         # if form.is_valid():

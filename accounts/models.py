@@ -65,3 +65,10 @@ class Team(models.Model):
 
     class Meta:
         ordering = ['-point']
+
+class Suggestion(models.Model):
+    user_name = models.CharField(max_length=4, default=None)
+    suggestion = models.CharField(max_length=100, default=None)
+
+    def __str__(self):
+        return '来自'+self.user_name

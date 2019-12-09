@@ -1,55 +1,197 @@
-{% extends 'navigationbar.html' %}
-
 {% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+     <title>manage</title>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 
-{% block title %}
-	<title>管理战队</title>
-{% endblock %}
+     <!-- MAIN CSS -->
+     <link rel="stylesheet" href="{% static 'css/templatemo-style.css' %}">
+</head>
+<body>
 
-{% block customcss %}
-
-{#    <link href="{% static 'accounts/css/login.css' %}" rel="stylesheet" />#}
-{% endblock %}
-
-{% block custombody %}
-{#<div class="col-md-3"></div>#}
-{#<div class="col-md-6">#}
-  <div class="container">
-      {% if message %}
-          <div class="alert alert-warning">{{ message }}</div>
-      {% endif %}
-      <h3 style="text-align: center; margin-bottom: 10px">{{ request.session.team_name }}</h3>
-
-      <form action="/teams/manage/" method="post">
-          {% csrf_token %}
-          <div class="form-group">
-              {{ updateName_form.teamename.label_tag }}
-              {{ updateName_form.teamname }}
+     <!-- PRE LOADER -->
+     <section class="preloader">
+          <div class="spinner">
+               <span class="spinner-rotate"></span>
           </div>
-          <button type="submit" class="btn btn-primary float-right">修改</button>
-      </form>
+     </section>
 
-      <div style="margin-top: 10px;">
-          <h3>队员：</h3>
-          <br>
-          {% if number > 1 %}
-              {% for member in members %}
-                {% if not member.name == request.session.user_name %}
-                  <div>
-                      <div>
-                          {{member.name}}
-                          <a href="/teams/manage/delete/{{ member.id }}/" class="btn btn-info" style="margin-left: 80px;">狠心抛弃</a><br>
-                      </div>
-                      <br><br><br>
-                  </div>
-                {% endif %}
-              {% endfor %}
-          {% else %}
-              <div style="margin-bottom: 15px">您暂时还是一位光杆司令，赶紧去招募强力的队友吧！</div>
-          {% endif %}
-      </div>
-  <a href="/teams/manage/disband/" class="btn btn-danger">各回各家，各找各妈</a>
-  </div>
-{#</div>#}
-{#<div class="col-md-3"></div>#}
-{% endblock %}
+
+     <!-- MENU -->
+     <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
+          <div class="container">
+
+               <div class="navbar-header">
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                    </button>
+
+                    <!-- lOGO TEXT HERE -->
+                    <a href="/accounts/" class="navbar-brand">MyCTF</a>
+               </div>
+
+               <!-- MENU LINKS -->
+               <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-nav-first">
+                         <li><a href="#home" class="smoothScroll">Home</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                         <li class="section-btn"><a href="/accounts/logout/">Logout</a></li>
+                    </ul>
+               </div>
+
+          </div>
+     </section>
+
+
+     <!-- BLOG HEADER -->
+     <section id="blog-header" data-stellar-background-ratio="0.5">
+          <div class="overlay"></div>
+          <div class="container" style="width: 600px">
+               <div class="modal-content modal-popup">
+
+                    <div class="modal-body" style="   background: #000000;
+    background: -webkit-linear-gradient(to right, #434343, #000000);
+    background: linear-gradient(to right, #434343, #000000);
+    border: none;
+    border-radius: 2px;
+    text-align: center;
+    position: relative;
+    padding: 2em;">
+                         <div class="container-fluid">
+                              <div class="row">
+                                   <div class="col-md-12 col-sm-12">
+                                        <div class="modal-title">
+                                             <h2>管理战队</h2>
+                                        </div>
+                                        <!-- NAV TABS -->
+                                          {% if message %}
+                                              <div class="alert alert-warning">{{ message }}</div>
+                                          {% endif %}
+                                        <!-- TAB PANES -->
+                                        <div class="tab-content" style="padding-top: 20px;text-align: left;" >
+                                             <h3 style="color: whitesmoke"><span class="label label-info">现队名</span>&nbsp{{ request.session.team_name }}</h3>
+                                             <br>
+                                            <form action="/teams/manage/" method="post">
+                                              {% csrf_token %}
+                                              <div class="form-group">
+                                                  {{ updateName_form.teamename.label_tag }}
+                                                  {{ updateName_form.teamname }}
+                                              </div>
+                                                <span class="input-group-btn"><button type="submit" class="btn btn-default">修改</button></span>
+                                          </form>
+                                    {#                                             <div class="input-group">#}
+{#                                                  <input type="text" class="form-control" placeholder="请输入新的队名...">#}
+{#                                                  <span class="input-group-btn"><button class="btn btn-default" type="button">修改</button></span>#}
+{#                                             </div>#}
+                                             <h3 style="color: whitesmoke"><span class="label label-info">队员</span>
+                                                 <br><br>
+                                                  {% if number > 1 %}
+                                                      {% for member in members %}
+                                                        {% if not member.name == request.session.user_name %}
+                                                          <div>
+                                                              <div>
+                                                                  {{member.name}}
+                                                                  <a href="/teams/manage/delete/{{ member.id }}/" class="btn btn-info" style="margin-left: 80px;">狠心抛弃</a><br>
+                                                              </div>
+                                                              <br><br><br>
+                                                          </div>
+                                                        {% endif %}
+                                                      {% endfor %}
+                                                  {% else %}
+                                                      <div style="margin-bottom: 15px">您暂时还是一位光杆司令，赶紧去招募强力的队友吧！</div>
+                                                  {% endif %}
+                                             </h3>
+                                             <h3 style="text-align: center"><a href="/teams/manage/disband/" style="float: bottom;font-size: small" class="btn section-btn smoothScroll">解散战队</a></h3>
+                                        </div>
+                                   </div>
+
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </section>
+
+
+     <!-- FOOTER -->
+     <footer data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-5 col-sm-12">
+                         <div class="footer-thumb footer-info">
+                              <h2>MyCTF</h2>
+                              <p>CTF (Capture The Flag) is originated in the 1996 DEFCON Global Hacking Conference, a competitive game among cybersecurity enthusiasts.</p>
+                         </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-4">
+                         <div class="footer-thumb">
+                              <h2>Rank</h2>
+                              <ul class="footer-link">
+                                   <li><a href="/scoreboard/">Personal</a></li>
+                                   <li><a href="/scoreboard/">Team</a></li>
+                                   <li><a href="/scoreboard/">Challenge</a></li>
+                              </ul>
+                         </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4">
+                         <div class="footer-thumb">
+                              <h2>Challenge</h2>
+                              <ul class="footer-link">
+                                   <li><a href="/challenges/">Pwn</a></li>
+                                   <li><a href="/challenges/">Web</a></li>
+                                   <li><a href="/challenges/">Re</a></li>
+                              </ul>
+                         </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4">
+                         <div class="footer-link">
+                              <h2>Team</h2>
+                              <li><a href="/teams/">Create</a></li>
+                              <li><a href="/teams/">Join</a></li>
+                         </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                         <div class="footer-bottom">
+                              <div class="col-md-6 col-sm-5">
+                                   <div class="copyright-text">
+                                        <p>Copyright &copy; 2019 MyCTF</p>
+                                   </div>
+                              </div>
+                              <div class="col-md-6 col-sm-7">
+                                   <div class="phone-contact">
+                                        <p>Call us <span>15632721215</span></p>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+
+               </div>
+          </div>
+     </footer>
+
+
+     <!-- SCRIPTS -->
+     <script src="{%static 'js/jquery.js' %}"></script>
+     <script src="{%static 'js/bootstrap.min.js' %}"></script>
+     <script src="{%static 'js/jquery.stellar.min.js' %}"></script>
+     <script src="{%static 'js/jquery.magnific-popup.min.js' %}"></script>
+     <script src="{%static 'js/smoothscroll.js' %}"></script>
+     <script src="{%static 'js/custom.js' %}"></script>
+
+</body>
+</html>

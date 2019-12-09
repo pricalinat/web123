@@ -1,55 +1,201 @@
-{% extends 'navigationbar.html' %}
-
 {% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+     <title>Sign up/in</title>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 
-{% block title %}
-	<title>欢迎登录</title>
-{% endblock %}
+     <!-- MAIN CSS -->
+     <link rel="stylesheet" href="{% static 'css/templatemo-style.css' %}">
+    <style>
+        .captcha{
+            color: #0b0b0b;
+        }
+    </style>
+</head>
+<body>
 
-{% block customcss %}
-    <link href="{% static 'accounts/css/login.css' %}" rel="stylesheet" />
-{% endblock %}
-
-{% block custombody %}
-  <div class="container">
-            <div class="col">
-              <form class="form-login" action="/accounts/login/" method="post">
-
-                  {% if login_form.captcha.errors %}
-                    <div class="alert alert-warning">{{ login_form.captcha.errors }}</div>
-                  {% elif message %}
-                      <div class="alert alert-warning">{{ message }}</div>
-                  {% endif %}
-
-                  {% csrf_token %}
-
-                  <h3 class="text-center">欢迎登录</h3>
-
-                  <div class="form-group">
-                      {{ login_form.student_id.label_tag }}
-                      {{ login_form.student_id }}
-                  </div>
-                  <div class="form-group">
-                      {{ login_form.password.label_tag }}
-                      {{ login_form.password }}
-                  </div>
-                  <div class="form-group">
-                      {{ login_form.captcha.label_tag }}
-                      {{ login_form.captcha }}
-                  </div>
-
-                  <div>
-                  <a href="/accounts/register/" class="text-success"><ins>还没有账号？</ins></a>
-
-                  <button type="submit" class="btn btn-primary float-right">登录</button>
-                </div>
-              <a href="/accounts/forget/" class="text-success"><ins>忘记密码？</ins></a>
-              </form>
-            </div>
-  </div> <!-- /container -->
-{% endblock %}
+     <!-- PRE LOADER -->
+     <section class="preloader">
+          <div class="spinner">
+               <span class="spinner-rotate"></span>
+          </div>
+     </section>
 
 
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/popper.js/1.15.0/umd/popper.min.js"></script>
-    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+     <!-- MENU -->
+     <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
+          <div class="container">
+
+               <div class="navbar-header">
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                    </button>
+
+                    <!-- lOGO TEXT HERE -->
+                    <a href="/accounts/" class="navbar-brand">MyCTF</a>
+               </div>
+
+               <!-- MENU LINKS -->
+               <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-nav-first">
+                         <li><a href="#" class="smoothScroll">Home</a></li>
+                         <li><a href="index.html#about" class="smoothScroll">Team</a></li>
+                         <li><a href="index.html#blog" class="smoothScroll">Challenge</a></li>
+                         <li><a href="index.html#work" class="smoothScroll">Rank</a></li>
+                         <li><a href="index.html#contact" class="smoothScroll">Suggestions</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                         <li class="section-btn"><a>Sign in / up</a></li>
+                    </ul>
+               </div>
+
+          </div>
+     </section>
+
+
+     <!-- BLOG HEADER -->
+     <section id="blog-header" data-stellar-background-ratio="0.5">
+          <div class="overlay"></div>
+          <div class="container" style="width: 600px">
+               <div class="modal-content modal-popup">
+                    <div class="modal-body" style="   background: #000000;
+    background: -webkit-linear-gradient(to right, #434343, #000000);
+    background: linear-gradient(to right, #434343, #000000);
+    border: none;
+    border-radius: 2px;
+    text-align: center;
+    position: relative;
+    padding: 2em;">
+                         <div class="container-fluid">
+                              <div class="row">
+                                   <div class="col-md-12 col-sm-12">
+                                        <div class="modal-title">
+                                             <h2>MyCTF</h2>
+                                        </div>
+                                        <!-- NAV TABS -->
+                                        <ul class="nav nav-tabs" role="tablist">
+                                             <li ><a href="/accounts/register/"  style="color: red">Create an account</a></li>
+                                             <li class="active"><a href="#sign_in" aria-controls="sign_in" role="tab" data-toggle="tab" style="color: red">Sign In</a></li>
+                                        </ul>
+                                        <!-- TAB PANES -->
+                                             <div role="tabpanel" class="tab-pane fade in" id="sign_in">
+                                                  <form action="/accounts/login/" method="post">
+                                                      <br>
+                                                      {% if login_form.captcha.errors %}
+                                                        <div class="alert alert-warning">{{ login_form.captcha.errors }}</div>
+                                                      {% elif message %}
+                                                          <div class="alert alert-warning">{{ message }}</div>
+                                                      {% endif %}
+                                                      {% csrf_token %}
+                                                       <div class="form-group">
+                                                          {{ login_form.student_id.label_tag }}
+                                                          {{ login_form.student_id }}
+                                                       </div>
+                                                       <div class="form-group">
+                                                          {{ login_form.password.label_tag }}
+                                                          {{ login_form.password }}
+                                                       </div>
+                                                       <br>
+                                                       <div class="captcha">
+                                                          {{ login_form.captcha }}
+                                                       </div>
+                                                       <input type="submit" class="section-btn" name="submit" value="Submit Button" >
+                                                       <br>
+                                                       <p><a href="/accounts/forget/" style="color: whitesmoke">Forgot your password?</a></p>
+
+                                                  </form>
+                                             </div>
+                                        </div>
+                                   </div>
+
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </section>
+
+
+     <!-- FOOTER -->
+     <footer data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-5 col-sm-12">
+                         <div class="footer-thumb footer-info">
+                              <h2>MyCTF</h2>
+                              <p>CTF (Capture The Flag) is originated in the 1996 DEFCON Global Hacking Conference, a competitive game among cybersecurity enthusiasts.</p>
+                         </div>
+                    </div>
+
+                     <div class="col-md-2 col-sm-4">
+                         <div class="footer-thumb">
+                              <h2>Rank</h2>
+                              <ul class="footer-link">
+                                   <li><a href="/scoreboard/">Personal</a></li>
+                                   <li><a href="/scoreboard/">Team</a></li>
+                                   <li><a href="/scoreboard">Challenge</a></li>
+                              </ul>
+                         </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-4">
+                         <div class="footer-thumb">
+                              <h2>Challenge</h2>
+                              <ul class="footer-link">
+                                   <li><a href="/challenges/">Pwn</a></li>
+                                   <li><a href="/challenges/">Web</a></li>
+                                   <li><a href="/challenges/">Re</a></li>
+                              </ul>
+                         </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-4">
+                         <div class="footer-link">
+                              <h2>Team</h2>
+                              <li><a href="/teams/">Create</a></li>
+                              <li><a href="/teams/">Join</a></li>
+                         </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                         <div class="footer-bottom">
+                              <div class="col-md-6 col-sm-5">
+                                   <div class="copyright-text">
+                                        <p>Copyright &copy; 2019 MyCTF</p>
+                                   </div>
+                              </div>
+                              <div class="col-md-6 col-sm-7">
+                                   <div class="phone-contact">
+                                        <p>Call us <span>15632721215</span></p>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+
+               </div>
+          </div>
+     </footer>
+
+
+     <!-- SCRIPTS -->
+     <script src="{%static 'js/jquery.js' %}"></script>
+     <script src="{%static 'js/bootstrap.min.js' %}"></script>
+     <script src="{%static 'js/jquery.stellar.min.js' %}"></script>
+     <script src="{%static 'js/jquery.magnific-popup.min.js' %}"></script>
+     <script src="{%static 'js/smoothscroll.js' %}"></script>
+     <script src="{%static 'js/custom.js' %}"></script>
+
+</body>
+</html>

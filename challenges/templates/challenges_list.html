@@ -1,123 +1,198 @@
-{% extends 'navigationbar.html' %}
 {% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
 
-{% block title %}
-	<title>题目列表</title>
-{% endblock %}
+     <title>Challenge</title>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-{% block customcss %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/challenges.css' %}">
-{% endblock %}
+     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 
-{% block custombody %}
-    {% if message %}
-      <div class="alert alert-warning">{{ message }}</div>
-    {% endif %}
-{#    <div class="table-responsive">#}
-{#    <table class="table table-striped table-hover">#}
-{#    <tr>#}
-{#     <th>类型</th>#}
-{#     <th>名字</th>#}
-{#     <th>描述</th>#}
-{#     <th>解决人数</th>#}
-{#     <th>分数</th>#}
-{#     <th></th>#}
-{#    </tr>#}
-{#        {% for cha in challenge %}#}
-{#    <tr>#}
-{#        <td>{{ cha.get_category_display }}</td>#}
-{#        <td><a href="/challenges/{{ cha.id }}/" style="font-size:20px">{{ cha.name }}</a></td>#}
-{#          {% if cha.message %}#}
-{#            <td>{{ cha.message }}</td>#}
-{#          {% else %}#}
-{#            <td>暂无</td>#}
-{#          {% endif %}#}
-{#        <td>{{ num }}</td>#}
-{#        <td>{{ cha.point }}</td>#}
-{#    </tr>#}
-{#        {% endfor %}#}
-{#    </table>#}
-{#   </div>#}
-    <div class="challenges">
-        <div class="container">
-            <div id="re">
-                <div class="heading">
-						<p>Reverse</p>
-                </div>
+     <!-- MAIN CSS -->
+     <link rel="stylesheet" href="{% static 'css/templatemo-style.css' %}">
+     <link rel="stylesheet" href="{% static 'css/challenges.css' %}">
+    <script src="{%static 'js/jquery.js' %}"></script>
 
-                {% if data_re %}
-                    {% for mission in data_re %}
-                        <div class="mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
-                            <p>{{ mission.name }}</p>
-                            <p>{{ mission.point }}</p>
-                        </div>
+     <script src="{%static 'js/jquery.stellar.min.js' %}"></script>
+     <script src="{%static 'js/jquery.magnific-popup.min.js' %}"></script>
+</head>
+<body>
 
-                        <div class="modal fade" id="{{ mission.id }}" role="dialog" data-backdrop="static">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close closeIT" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">{{ mission.name }}</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p><b>Challenge Description: </b></p>
-                                        {% if mission.message %}
-                                            <p>{{ mission.message }}</p>
-                                        {% else %}
-                                            暂无
-                                        {% endif %}
-                                        {% if mission.file %}
-                                            <p><b>File:</b> <a href="uploads/{{ mission.file }}">download</a></p>
-                                        {% endif %}
-                                        <p><b>Points: </b>{{ mission.point }}</p>
-                                        <form method="post" id="{{ mission.id }}_flag_form" action="/challenges/{{ mission.id }}/">
-                                            {% csrf_token %}
-                                            <input type="text" name="{{ mission.id }}_flag" class="input_flag" placeholder="Submit Flag" id="{{ mission.id }}_flag" autofocus>
-                                            <button type="submit" name="submit" class="input_flag_button">Submit</button>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default closeIT" data-dismiss="modal">Close</button>
+     <!-- PRE LOADER -->
+     <section class="preloader">
+          <div class="spinner">
+               <span class="spinner-rotate"></span>
+          </div>
+     </section>
+
+
+     <!-- MENU -->
+     <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
+          <div class="container">
+
+               <div class="navbar-header">
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                    </button>
+
+                    <!-- lOGO TEXT HERE -->
+                    <a href="/accounts/" class="navbar-brand">MyCTF</a>
+               </div>
+
+               <!-- MENU LINKS -->
+               <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-nav-first">
+                         <li><a href="#home" class="smoothScroll">Home</a></li>
+                         <li><a href="#re" class="smoothScroll">Re</a></li>
+                         <li><a href="#pwn" class="smoothScroll">Pwn</a></li>
+                         <li><a href="#web" class="smoothScroll">Web</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                         <li class="section-btn"><a href="/accounts/logout/">Logout</a></li>
+                    </ul>
+               </div>
+
+          </div>
+     </section>
+
+
+     <!-- BLOG HEADER -->
+     <section id="blog-header" data-stellar-background-ratio="0.5">
+          <div class="overlay"></div>
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-offset-1 col-md-5 col-sm-12">
+                         <h2>Welcome to MyCTF!</h2>
+                    </div>
+                    
+               </div>
+          </div>
+     </section>
+
+
+     <!-- BLOG DETAIL -->
+     <section id="re" data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row"><br>
+                    <div class="col-md-12 col-sm-12">
+                         <div class="section-title">
+                              <h2>Re</h2>
+                              <span class="line-bar">...</span>
+                         </div>
+                    </div>
+                    {% if data_re %}
+                        {% for mission in data_re %}
+                            <div class="col-md-4 col-sm-6">
+                            {% if mission.is_solved == 1  %}
+                                <div class="solved_mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
+                                <p style="color:white;">{{ mission.name }}</p>
+                                <p style="color:white;">{{ mission.point }}</p>
+                                </div>
+                            {% else %}
+                                <div class="mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
+                                    <p style="color:white;">{{ mission.name }}</p>
+                                    <p style="color:white;">{{ mission.point }}</p>
+                                </div>
+                            {% endif %}
+                            </div>
+                            <div class="modal fade" id="{{ mission.id }}" role="dialog" data-backdrop="static">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close closeIT" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">{{ mission.name }}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p><b>Challenge Description: </b></p>
+                                            {% if mission.message %}
+                                                <p>{{ mission.message }}</p>
+                                            {% else %}
+                                                暂无
+                                            {% endif %}
+                                            {% if mission.file %}
+                                                <p><b>File:</b> <a href="uploads/{{ mission.file }}">download</a></p>
+                                            {% endif %}
+                                            <p><b>Points: </b>{{ mission.point }}</p>
+                                            <form method="post" id="{{ mission.id }}_flag_form" action="/challenges/{{ mission.id }}/">
+                                                {% csrf_token %}
+                                                <input type="text" name="{{ mission.id }}_flag" class="input_flag" placeholder="Submit Flag" id="{{ mission.id }}_flag" autofocus>
+                                                <br><br><button type="submit" name="submit" class="input_flag_button">Submit</button>
+                                                <br>
+                                                <br>
+                                            </form>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <script type="text/javascript">
-                            $(document).ready(function (){
-                                $("#{{ mission.id }}_flag_form").submit(function(event) {
-                                    $.ajax({
-                                        type : "POST",
-                                        url : "/challenges/{{ mission.id }}/",
-                                        data : $(this).serialize(),
-                                        success : function(response) {
-                                            $("#{{ mission.id }}_flag_form").append(response)
-                                        }
+                            <script type="text/javascript">
+                                $(document).ready(function (){
+                                    $("#{{ mission.id }}_flag_form").submit(function(event) {
+                                        $.ajax({
+                                            type : "POST",
+                                            url : "/challenges/{{ mission.id }}/",
+                                            data : $(this).serialize(),
+                                            success : function(response) {
+                                                $("#{{ mission.id }}_flag_form").append(response)
+                                            }
+                                        });
+                                        event.preventDefault();
                                     });
-                                    event.preventDefault();
                                 });
-                            });
-                        </script>
+                            </script>
 
-                    {% endfor %}
+                        {% endfor %}
 
-                {% else %}
-                    <p style="color: red">敬请期待。。。</p>
-                {% endif %}
-            </div>
+                    {% else %}
+                        <p style="color: red">敬请期待。。。</p>
+                    {% endif %}
 
-            <div id="web">
-                <div class="heading">
-						<p>Web</p>
-                </div>
 
-                {% if data_web %}
-                    {% for mission in data_web %}
-                        <div class="mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
-                            <p>{{ mission.name }}</p>
-                            <p>{{ mission.point }}</p>
+
+               </div>
+          </div>
+     </section>
+
+     <section id="pwn" data-stellar-background-ratio="0.5" style="background-color: #ddfffc">
+          <div class="container">
+               <div class="row"><br>
+                    <div class="col-md-12 col-sm-12">
+                         <div class="section-title">
+                              <h2>Pwn</h2>
+                              <span class="line-bar">...</span>
+                         </div>
+                    </div>
+
+                    {% if  data_pwn%}
+                    {% for mission in data_pwn %}
+                        <div class="col-md-4 col-sm-6">
+                            {% if mission.is_solved == 1  %}
+                                <div class="solved_mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
+                                <p style="color:white;">{{ mission.name }}</p>
+                                <p style="color:white;">{{ mission.point }}</p>
+                                </div>
+                            {% else %}
+                                <div class="mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
+                                    <p style="color:white;">{{ mission.name }}</p>
+                                    <p style="color:white;">{{ mission.point }}</p>
+                                </div>
+                            {% endif %}
+
                         </div>
 
+                        </div>
                         <div class="modal fade" id="{{ mission.id }}" role="dialog" data-backdrop="static">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -140,12 +215,12 @@
                                         <form method="post" id="{{ mission.id }}_flag_form" action="/challenges/{{ mission.id }}/">
                                             {% csrf_token %}
                                             <input type="text" name="{{ mission.id }}_flag" class="input_flag" placeholder="Submit Flag" id="{{ mission.id }}_flag" autofocus="">
-                                            <button type="submit" name="submit" class="input_flag_button">Submit</button>
+                                            <br><br><button type="submit" name="submit" class="input_flag_button">Submit</button>
+                                            <br>
+                                            <br>
                                         </form>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default closeIT" data-dismiss="modal">Close</button>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -171,20 +246,36 @@
                 {% else %}
                     <p style="color: red">敬请期待。。。</p>
                 {% endif %}
+
+
+               </div>
+          </div>
+     </section>
+
+     <section id="web" data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+               <div class="col-md-12 col-sm-12">
+                 <div class="section-title">
+                      <h2>Web</h2>
+                      <span class="line-bar">...</span>
+                 </div>
             </div>
-
-            <div id="pwn">
-                <div class="heading">
-						<p>Pwn</p>
-                </div>
-
-                {% if  data_pwn%}
-                    {% for mission in data_pwn %}
-                        <div class="mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
-                            <p>{{ mission.name }}</p>
-                            <p>{{ mission.point }}</p>
+                    {% if data_web %}
+                    {% for mission in data_web %}
+                        <div class="col-md-4 col-sm-6">
+                            {% if mission.is_solved == 1 %}
+                                <div class="solved_mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
+                                <p style="color:white;">{{ mission.name }}</p>
+                                <p style="color:white;">{{ mission.point }}</p>
+                                </div>
+                            {% else %}
+                                <div class="mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
+                                    <p style="color:white;">{{ mission.name }}</p>
+                                    <p style="color:white;">{{ mission.point }}</p>
+                                </div>
+                            {% endif %}
                         </div>
-
                         <div class="modal fade" id="{{ mission.id }}" role="dialog" data-backdrop="static">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -199,6 +290,7 @@
                                         {% else %}
                                             暂无
                                         {% endif %}
+                                        <p><b>Scene: </b><a href="{{mission.scene}}" target="_blank">{{ mission.scene }}</a></p>
                                         {% if mission.file %}
                                             <p><b>File:</b> <a href="uploads/{{ mission.file }}">download</a></p>
                                         {% endif %}
@@ -206,12 +298,12 @@
                                         <form method="post" id="{{ mission.id }}_flag_form" action="/challenges/{{ mission.id }}/">
                                             {% csrf_token %}
                                             <input type="text" name="{{ mission.id }}_flag" class="input_flag" placeholder="Submit Flag" id="{{ mission.id }}_flag" autofocus="">
-                                            <button type="submit" name="submit" class="input_flag_button">Submit</button>
+                                            <br><br><button type="submit" name="submit" class="input_flag_button">Submit</button>
+                                            <br>
+                                            <br>
                                         </form>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default closeIT" data-dismiss="modal">Close</button>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -237,8 +329,135 @@
                 {% else %}
                     <p style="color: red">敬请期待。。。</p>
                 {% endif %}
-            </div>
-        </div>
-    </div>
 
-{% endblock %}
+
+               </div>
+          </div>
+     </section>
+
+     <!-- FOOTER -->
+     <footer data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-5 col-sm-12">
+                         <div class="footer-thumb footer-info">
+                              <h2>MyCTF</h2>
+                              <p>CTF (Capture The Flag) is originated in the 1996 DEFCON Global Hacking Conference, a competitive game among cybersecurity enthusiasts.</p>
+                         </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-4">
+                         <div class="footer-thumb">
+                              <h2>Rank</h2>
+                              <ul class="footer-link">
+                                   <li><a href="/scoreboard/">Personal</a></li>
+                                   <li><a href="/scoreboard/">Team</a></li>
+                                   <li><a href="/scoreboard">Challenge</a></li>
+                              </ul>
+                         </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-4">
+                         <div class="footer-thumb">
+                              <h2>Challenge</h2>
+                              <ul class="footer-link">
+                                   <li><a href="/challenges/">Pwn</a></li>
+                                   <li><a href="/challenges/">Web</a></li>
+                                   <li><a href="/challenges/">Re</a></li>
+                              </ul>
+                         </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-4">
+                         <div class="footer-link">
+                              <h2>Team</h2>
+                              <li><a href="/teams/">Create</a></li>
+                              <li><a href="/teams/">Join</a></li>
+                         </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                         <div class="footer-bottom">
+                              <div class="col-md-6 col-sm-5">
+                                   <div class="copyright-text">
+                                        <p>Copyright &copy; 2019 MyCTF</p>
+                                   </div>
+                              </div>
+                              <div class="col-md-6 col-sm-7">
+                                   <div class="phone-contact">
+                                        <p>Call us <span>15632721215</span></p>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+
+               </div>
+          </div>
+     </footer>
+
+
+     <!-- MODAL -->
+     <section class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+               <div class="modal-content modal-popup">
+
+                    <div class="modal-header">
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                         </button>
+                    </div>
+
+                    <div class="modal-body">
+                         <div class="container-fluid">
+                              <div class="row">
+
+                                   <div class="col-md-12 col-sm-12">
+                                        <div class="modal-title">
+                                             <h2>MyCTF</h2>
+                                        </div>
+
+                                        <!-- NAV TABS -->
+                                        <ul class="nav nav-tabs" role="tablist">
+                                             <li class="active"><a href="#sign_up" aria-controls="sign_up" role="tab" data-toggle="tab">Create an account</a></li>
+                                             <li><a href="#sign_in" aria-controls="sign_in" role="tab" data-toggle="tab">Sign In</a></li>
+                                        </ul>
+
+                                        <!-- TAB PANES -->
+                                        <div class="tab-content">
+                                             <div role="tabpanel" class="tab-pane fade in active" id="sign_up">
+                                                  <form action="#" method="post">
+                                                       <input type="text" class="form-control" name="name" placeholder="Name" required>
+                                                       <input type="telephone" class="form-control" name="telephone" placeholder="Telephone" required>
+                                                       <input type="email" class="form-control" name="email" placeholder="Email" required>
+                                                       <input type="password" class="form-control" name="password" placeholder="Password" required>
+                                                       <input type="submit" class="form-control" name="submit" value="Submit Button">
+                                                  </form>
+                                             </div>
+
+                                             <div role="tabpanel" class="tab-pane fade in" id="sign_in">
+                                                  <form action="#" method="post">
+                                                       <input type="email" class="form-control" name="email" placeholder="Email" required>
+                                                       <input type="password" class="form-control" name="password" placeholder="Password" required>
+                                                       <input type="submit" class="form-control" name="submit" value="Submit Button">
+                                                       <a href="https://www.facebook.com/templatemo">Forgot your password?</a>
+                                                  </form>
+                                             </div>
+                                        </div>
+                                   </div>
+
+                              </div>
+                         </div>
+                    </div>
+
+               </div>
+          </div>
+     </section>
+
+     <!-- SCRIPTS -->
+
+     <script src="{%static 'js/bootstrap.min.js' %}"></script>
+     <script src="{%static 'js/smoothscroll.js' %}"></script>
+     <script src="{%static 'js/custom.js' %}"></script>
+
+</body>
+</html>

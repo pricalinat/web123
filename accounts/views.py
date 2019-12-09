@@ -327,3 +327,14 @@ def reset_pwd(request):
             return render(request, 'accounts/reset.html', locals())
     reset_form = forms.ResetForm()
     return render(request, 'accounts/reset.html', locals())
+
+def suggest(request):
+    if not request.session.get('is_login', None):
+        return redirect('/accounts/login/')
+    if request.method == 'POST':
+        suggestion = models.Suggestion()
+        suggestion.user_name = request.session['user_name']
+        suggestion.suggestion = request.POST.get('message')
+        suggestion.save()
+        message = '感谢您的建议！'
+        return render(request, 'accounts/index.html', locals())

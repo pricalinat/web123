@@ -1,45 +1,250 @@
-{% extends 'navigationbar.html' %}
 {% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
 
-{% block title %}
-	<title>队伍列表</title>
-{% endblock %}
+     <title>Rank</title>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="author" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+     <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 
-{% block customcss %}
-   <link href="{% static 'teams/css/team_list.css' %}" rel="stylesheet" />
-{% endblock %}
+     <!-- MAIN CSS -->
+     <link rel="stylesheet" href="{% static 'css/templatemo-style.css' %}">
+</head>
+<body>
 
-{% block custombody %}
-    {% if message %}
-      <div class="alert alert-warning">{{ message }}</div>
-    {% endif %}
-    <div class="table-responsive">
-    <table class="table table-striped table-hover">
-    <tr>
-     <th>排名</th>
-     <th class="col-lg-pull-4">队伍名称</th>
-     <th>分数</th>
-     <th>人数</th>
-     <th></th>
-    </tr>
-
-    {% for team in teams %}
-    <tr>
-        <td class="form-control-static">{{  forloop.counter }}</td>
-        <td><a href="/teams/detail/{{ team.id }}/" style="font-size:20px">{{ team.team_name }}</a></td>
-        <td>{{ team.point }}</td>
-        <td>{{ team.team_number }}/5</td>
-        <td class="active"><a href="/teams/join/{{ team.id }}/" id="jointeam">加入团队</a></td>
-    </tr>
-    {% endfor %}
+     <!-- PRE LOADER -->
+     <section class="preloader">
+          <div class="spinner">
+               <span class="spinner-rotate"></span>
+          </div>
+     </section>
 
 
-    </table>
-   </div>
+     <!-- MENU -->
+     <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
+          <div class="container">
+
+               <div class="navbar-header">
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                         <span class="icon icon-bar"></span>
+                    </button>
+
+                    <!-- lOGO TEXT HERE -->
+                    <a href="/accounts/" class="navbar-brand">MyCTF</a>
+               </div>
+
+               <!-- MENU LINKS -->
+               <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-nav-first">
+                         <li><a href="#home" class="smoothScroll">Home</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                         <li class="section-btn"><a href="/accounts/logout/" >Logout</a></li>
+                    </ul>
+               </div>
+
+          </div>
+     </section>
 
 
+     <!-- BLOG HEADER -->
+     <section id="blog-header" data-stellar-background-ratio="0.5">
+          <div class="overlay"></div>
+          <div class="container">
+               <div class="row">
 
-<a href="/teams/create/" type="" class="btn btn-primary float-right" id="createbutton">创建自己的团队</a>
+                    <div class="col-md-offset-1 col-md-5 col-sm-12">
+                         <h2>Welcome to join the team!</h2>
 
-{% endblock %}
+                    </div>
+                    
+               </div>
+          </div>
+     </section>
 
+
+     <!-- BLOG DETAIL -->
+     <section id="team" data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+                {% if message %}
+                  <div class="alert alert-warning">{{ message }}</div>
+                {% endif %}
+                    <div class="col-md-12 col-sm-12">
+                         <h2>Team</h2>
+                         <br>
+                              <table width="90%" class="table">
+
+                                   <thead >
+                                   <tr>
+                                        <th>Rank</th>
+                                        <th>Name</th>
+                                        <th>Point</th>
+                                        <th>Number</th>
+                                        <th>Join</th>
+                                   </tr>
+                                   </thead>
+                                    {% for team in teams %}
+                                    <tr>
+                                        <td class="form-control-static">{{  forloop.counter }}</td>
+                                        <td><a href="/teams/detail/{{ team.id }}/" style="font-size:20px">{{ team.team_name }}</a></td>
+                                        <td>{{ team.point }}</td>
+                                        <td>{{ team.team_number }}/5</td>
+                                        <td class="active"><a href="/teams/join/{{ team.id }}/" id="jointeam">加入团队</a></td>
+                                    </tr>
+                                    {% endfor %}
+{#                                   <tr>#}
+{#                                        <td>109</td>#}
+{#                                        <td>13</td>#}
+{#                                        <td>1.34</td>#}
+{#                                       <td> <a href="#" class="btn btn-default ">Join</a></td>#}
+{#                                   </tr>#}
+
+                              </table>
+                         <br>
+                         <h3>Want to create a new team?</h3>
+                         <br>
+                         <a href="/teams/create/" class="btn section-btn">Create</a>
+                         <br>
+                    </div>
+               </div>
+          </div>
+     </section>
+
+
+     <!-- FOOTER -->
+     <footer data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+
+                    <div class="col-md-5 col-sm-12">
+                         <div class="footer-thumb footer-info">
+                              <h2>MyCTF</h2>
+                              <p>CTF (Capture The Flag) is originated in the 1996 DEFCON Global Hacking Conference, a competitive game among cybersecurity enthusiasts.</p>
+                         </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-4">
+                         <div class="footer-thumb">
+                              <h2>Rank</h2>
+                              <ul class="footer-link">
+                                   <li><a href="/scoreboard/">Personal</a></li>
+                                   <li><a href="/scoreboard/">Team</a></li>
+                                   <li><a href="/scoreboard/">Challenge</a></li>
+                              </ul>
+                         </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4">
+                         <div class="footer-thumb">
+                              <h2>Challenge</h2>
+                              <ul class="footer-link">
+                                   <li><a href="/challenges/">Pwn</a></li>
+                                   <li><a href="/challenges/">Web</a></li>
+                                   <li><a href="/challenges/">Re</a></li>
+                              </ul>
+                         </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4">
+                         <div class="footer-link">
+                              <h2>Team</h2>
+                              <li><a href="/teams/">Create</a></li>
+                              <li><a href="/teams/">Join</a></li>
+                         </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                         <div class="footer-bottom">
+                              <div class="col-md-6 col-sm-5">
+                                   <div class="copyright-text">
+                                        <p>Copyright &copy; 2019 MyCTF</p>
+                                   </div>
+                              </div>
+                              <div class="col-md-6 col-sm-7">
+                                   <div class="phone-contact">
+                                        <p>Call us <span>15632721215</span></p>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+
+               </div>
+          </div>
+     </footer>
+
+
+     <!-- MODAL -->
+     <section class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+               <div class="modal-content modal-popup">
+
+                    <div class="modal-header">
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                         </button>
+                    </div>
+
+                    <div class="modal-body">
+                         <div class="container-fluid">
+                              <div class="row">
+
+                                   <div class="col-md-12 col-sm-12">
+                                        <div class="modal-title">
+                                             <h2>MyCTF</h2>
+                                        </div>
+
+                                        <!-- NAV TABS -->
+                                        <ul class="nav nav-tabs" role="tablist">
+                                             <li class="active"><a href="#sign_up" aria-controls="sign_up" role="tab" data-toggle="tab">Create an account</a></li>
+                                             <li><a href="#sign_in" aria-controls="sign_in" role="tab" data-toggle="tab">Sign In</a></li>
+                                        </ul>
+
+                                        <!-- TAB PANES -->
+                                        <div class="tab-content">
+                                             <div role="tabpanel" class="tab-pane fade in active" id="sign_up">
+                                                  <form action="#" method="post">
+                                                       <input type="text" class="form-control" name="name" placeholder="Name" required>
+                                                       <input type="telephone" class="form-control" name="telephone" placeholder="Telephone" required>
+                                                       <input type="email" class="form-control" name="email" placeholder="Email" required>
+                                                       <input type="password" class="form-control" name="password" placeholder="Password" required>
+                                                       <input type="submit" class="form-control" name="submit" value="Submit Button">
+                                                  </form>
+                                             </div>
+
+                                             <div role="tabpanel" class="tab-pane fade in" id="sign_in">
+                                                  <form action="#" method="post">
+                                                       <input type="email" class="form-control" name="email" placeholder="Email" required>
+                                                       <input type="password" class="form-control" name="password" placeholder="Password" required>
+                                                       <input type="submit" class="form-control" name="submit" value="Submit Button">
+                                                       <a href="https://www.facebook.com/templatemo">Forgot your password?</a>
+                                                  </form>
+                                             </div>
+                                        </div>
+                                   </div>
+
+                              </div>
+                         </div>
+                    </div>
+
+               </div>
+          </div>
+     </section>
+
+     <!-- SCRIPTS -->
+     <script src="{%static 'js/jquery.js' %}"></script>
+     <script src="{%static 'js/bootstrap.min.js' %}"></script>
+     <script src="{%static 'js/jquery.stellar.min.js' %}"></script>
+     <script src="{%static 'js/jquery.magnific-popup.min.js' %}"></script>
+     <script src="{%static 'js/smoothscroll.js' %}"></script>
+     <script src="{%static 'js/custom.js' %}"></script>
+
+</body>
+</html>

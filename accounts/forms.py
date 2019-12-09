@@ -4,8 +4,10 @@ from captcha.fields import CaptchaField
 
 class UserForm(forms.Form):
     student_id = forms.CharField(label='学号', max_length=10, widget=forms.TextInput(attrs={'class': 'form-control',
-                                                                                          'autofocus': ''}))
-    password = forms.CharField(label='密码', max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+                                                                                          'autofocus': '',
+                                                                                          'placeholder': '学号'}))
+    password = forms.CharField(label='密码', max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control',
+                                                                                             'placeholder': '密码'}))
     captcha = CaptchaField(label='验证码')
 
 

@@ -15,4 +15,5 @@ urlpatterns = [
     path('captcha/', include('captcha.urls')),
     path('forget/',views.forget),
     path('reset/',views.reset_pwd),
+    path('suggest/',views.suggest),
 ]
