@@ -10,7 +10,7 @@ def get_upload_path(instance, filename):
                                                             filename)
 
 
-CATEGORY_CHOICES = ((0, 'RE'), (1, 'WEB'), (2, 'PWN'))
+CATEGORY_CHOICES = ((0, 'RE'), (1, 'WEB'), (2, 'PWN'), (3, 'CRYPTO'))
 
 
 class Challenges(models.Model):
@@ -20,7 +20,7 @@ class Challenges(models.Model):
     point = models.IntegerField(default=0)
     file = models.FileField(null=True, blank=True, upload_to=get_upload_path)
     flag = models.CharField(max_length=100)
-    scene = models.CharField(default=None, max_length=100)
+    scene = models.CharField(default=None, max_length=100, blank=True)
     solver = models.ManyToManyField(User,
                                     blank=True,
                                     default=None,

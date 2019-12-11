@@ -23,9 +23,9 @@ from accounts import views as accounts_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/',include('accounts.urls')),
-    # path('teams/',include('teams.views')),
     path('',accounts_view.index),
     path('challenges/',include('challenges.urls')),
     path('teams/',include('teams.urls')),
     path('scoreboard/', include('scoreboard.urls')),
+    path('exam/',include('exam.urls')),
 ]

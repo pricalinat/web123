@@ -3,7 +3,7 @@
 <html>
 <head>
 
-     <title>Challenge</title>
+     <title>Exam</title>
      <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=Edge">
      <meta name="description" content="">
@@ -58,7 +58,7 @@
                          <li><a href="/challenges/collection/" class="smoothScroll">Collection</a></li>
                          <li><a href="/challenges/" class="smoothScroll">Switch</a></li>
                     </ul>
-
+                    <button><a href="/exam/end_exam/">交卷</a></button>
                     <ul class="nav navbar-nav navbar-right">
                          <li class="section-btn"><a href="/accounts/logout/">Logout</a></li>
                     </ul>
@@ -84,17 +84,17 @@
 
 
      <!-- BLOG DETAIL -->
-     <section id="low" data-stellar-background-ratio="0.5">
+     <section data-stellar-background-ratio="0.5">
           <div class="container">
                <div class="row"><br>
                     <div class="col-md-12 col-sm-12">
                          <div class="section-title">
-                              <h2>Low</h2>
+                              <h2 id="endtime">{{time}}</h2>
                               <span class="line-bar">...</span>
                          </div>
                     </div>
-                    {% if data_low %}
-                        {% for mission in data_low %}
+                    {% if problems %}
+                        {% for mission in problems %}
                             <div class="col-md-4 col-sm-6">
                             {% if mission.is_solved == 1  %}
                                 <div class="solved_mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
@@ -139,6 +139,9 @@
                                                 <p>{{ mission.message }}</p>
                                             {% else %}
                                                 暂无
+                                            {% endif %}
+                                            {% if mission.scene %}
+                                                <p>{{ mission.scene }}</p>
                                             {% endif %}
                                             {% if mission.file %}
                                                 <p><b>File:</b> <a href="uploads/{{ mission.file }}">download</a></p>
@@ -191,221 +194,7 @@
           </div>
      </section>
 
-     <section id="medium" data-stellar-background-ratio="0.5" style="background-color: #ddfffc">
-          <div class="container">
-               <div class="row"><br>
-                    <div class="col-md-12 col-sm-12">
-                         <div class="section-title">
-                              <h2>Medium</h2>
-                              <span class="line-bar">...</span>
-                         </div>
-                    </div>
 
-                    {% if  data_medium%}
-                    {% for mission in data_medium %}
-                        <div class="col-md-4 col-sm-6">
-                            {% if mission.is_solved == 1  %}
-                                <div class="solved_mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
-                                <p style="color:white;">{{ mission.name }}</p>
-                                {% if mission.category == 0 %}
-                                    <span style="color:white;font-size: 14px;">（reverse）</span>
-                                {% elif mission.category == 1 %}
-                                    <span style="color:white;font-size: 14px;">（pwn）</span>
-                                {% elif mission.category == 2 %}
-                                    <span style="color:white;font-size: 14px;">（web）</span>
-                                {% elif mission.category == 3 %}
-                                        <span style="color:white;font-size: 14px;">（crypto）</span>
-                                {% endif %}
-                                <p style="color:white;">{{ mission.point }}</p>
-                                </div>
-                            {% else %}
-                                <div class="mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
-                                    <p style="color:white;">{{ mission.name }}</p>
-                                    {% if mission.category == 0 %}
-                                    <span style="color:white;font-size: 14px;">（reverse）</span>
-                                    {% elif mission.category == 1 %}
-                                        <span style="color:white;font-size: 14px;">（pwn）</span>
-                                    {% elif mission.category == 2 %}
-                                        <span style="color:white;font-size: 14px;">（web）</span>
-                                    {% elif mission.category == 3 %}
-                                        <span style="color:white;font-size: 14px;">（crypto）</span>
-                                    {% endif %}
-                                    <p style="color:white;">{{ mission.point }}</p>
-                                </div>
-                            {% endif %}
-
-                        </div>
-
-                        </div>
-                        <div class="modal fade" id="{{ mission.id }}" role="dialog" data-backdrop="static">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close closeIT" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">{{ mission.name }}</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p><b>Challenge Description: </b></p>
-                                        {% if mission.message %}
-                                            <p>{{ mission.message }}</p>
-                                        {% else %}
-                                            暂无
-                                        {% endif %}
-                                        <p><b>Scene: </b><a href="{{mission.scene}}" target="_blank">{{ mission.scene }}</a></p>
-                                        {% if mission.file %}
-                                            <p><b>File:</b> <a href="uploads/{{ mission.file }}">download</a></p>
-                                        {% endif %}
-                                        <p><b>Points: </b>{{ mission.point }}</p>
-                                        <form method="post" id="{{ mission.id }}_flag_form" action="/challenges/{{ mission.id }}/">
-                                            {% csrf_token %}
-                                            <input type="text" name="{{ mission.id }}_flag" class="input_flag" placeholder="Submit Flag" id="{{ mission.id }}_flag" autofocus="">
-                                            <br><br><button type="submit" name="submit" class="input_flag_button">Submit</button>
-                                            <br>
-                                            <br>
-                                        </form>
-                                        {% if mission.is_collected %}
-                                            <a id="{{ mission.id }}_collect" href="/challenges/collect/{{ mission.id }}/">取消收藏</a>
-                                        {% else %}
-                                            <a id="{{ mission.id }}_collect" href="/challenges/collect/{{ mission.id }}/">收藏</a>
-                                        {% endif %}
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <script type="text/javascript">
-                            $(document).ready(function (){
-                                $("#{{ mission.id }}_flag_form").submit(function(event) {
-                                    $.ajax({
-                                        type : "POST",
-                                        url : "/challenges/{{ mission.id }}/",
-                                        data : $(this).serialize(),
-                                        success : function(response) {
-                                            $("#{{ mission.id }}_flag_form").append(response)
-                                        }
-                                    });
-                                    event.preventDefault();
-                                });
-                            });
-                        </script>
-
-                    {% endfor %}
-
-                {% else %}
-                    <p style="color: red">None</p>
-                {% endif %}
-
-
-               </div>
-          </div>
-     </section>
-
-     <section id="high" data-stellar-background-ratio="0.5">
-          <div class="container">
-               <div class="row">
-               <div class="col-md-12 col-sm-12">
-                 <div class="section-title">
-                      <h2>High</h2>
-                      <span class="line-bar">...</span>
-                 </div>
-            </div>
-                    {% if data_high %}
-                    {% for mission in data_high %}
-                        <div class="col-md-4 col-sm-6">
-                            {% if mission.is_solved == 1  %}
-                                <div class="solved_mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
-                                <p style="color:white;">{{ mission.name }}</p>
-                                {% if mission.category == 0 %}
-                                    <span style="color:white;font-size: 14px;">（reverse）</span>
-                                {% elif mission.category == 1 %}
-                                    <span style="color:white;font-size: 14px;">（pwn）</span>
-                                {% elif mission.category == 2 %}
-                                    <span style="color:white;font-size: 14px;">（web）</span>
-                                {% elif mission.category == 3 %}
-                                        <span style="color:white;font-size: 14px;">（crypto）</span>
-                                {% endif %}
-                                <p style="color:white;">{{ mission.point }}</p>
-                                </div>
-                            {% else %}
-                                <div class="mission"  data-toggle="modal" data-target="#{{ mission.id }}" id="display_{{ mission.id }}">
-                                    <p style="color:white;">{{ mission.name }}</p>
-                                    {% if mission.category == 0 %}
-                                    <span style="color:white;font-size: 14px;">（reverse）</span>
-                                    {% elif mission.category == 1 %}
-                                        <span style="color:white;font-size: 14px;">（pwn）</span>
-                                    {% elif mission.category == 2 %}
-                                        <span style="color:white;font-size: 14px;">（web）</span>
-                                    {% elif mission.category == 3 %}
-                                        <span style="color:white;font-size: 14px;">（crypto）</span>
-                                    {% endif %}
-                                    <p style="color:white;">{{ mission.point }}</p>
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="modal fade" id="{{ mission.id }}" role="dialog" data-backdrop="static">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close closeIT" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">{{ mission.name }}</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p><b>Challenge Description: </b></p>
-                                        {% if mission.message %}
-                                            <p>{{ mission.message }}</p>
-                                        {% else %}
-                                            暂无
-                                        {% endif %}
-                                        <p><b>Scene: </b><a href="{{mission.scene}}" target="_blank">{{ mission.scene }}</a></p>
-                                        {% if mission.file %}
-                                            <p><b>File:</b> <a href="uploads/{{ mission.file }}">download</a></p>
-                                        {% endif %}
-                                        <p><b>Points: </b>{{ mission.point }}</p>
-                                        <form method="post" id="{{ mission.id }}_flag_form" action="/challenges/{{ mission.id }}/">
-                                            {% csrf_token %}
-                                            <input type="text" name="{{ mission.id }}_flag" class="input_flag" placeholder="Submit Flag" id="{{ mission.id }}_flag" autofocus="">
-                                            <br><br><button type="submit" name="submit" class="input_flag_button">Submit</button>
-                                            <br>
-                                            <br>
-                                        </form>
-                                        {% if mission.is_collected %}
-                                            <a id="{{ mission.id }}_collect" href="/challenges/collect/{{ mission.id }}/">取消收藏</a>
-                                        {% else %}
-                                            <a id="{{ mission.id }}_collect" href="/challenges/collect/{{ mission.id }}/">收藏</a>
-                                        {% endif %}
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <script type="text/javascript">
-                            $(document).ready(function (){
-                                $("#{{ mission.id }}_flag_form").submit(function(event) {
-                                    $.ajax({
-                                        type : "POST",
-                                        url : "/challenges/{{ mission.id }}/",
-                                        data : $(this).serialize(),
-                                        success : function(response) {
-                                            $("#{{ mission.id }}_flag_form").append(response)
-                                        }
-                                    });
-                                    event.preventDefault();
-                                });
-                            });
-                        </script>
-
-                    {% endfor %}
-
-                {% else %}
-                    <p style="color: red">None</p>
-                {% endif %}
-
-
-               </div>
-          </div>
-     </section>
 
      <!-- FOOTER -->
      <footer data-stellar-background-ratio="0.5">
@@ -530,6 +319,70 @@
      <script src="{%static 'js/bootstrap.min.js' %}"></script>
      <script src="{%static 'js/smoothscroll.js' %}"></script>
      <script src="{%static 'js/custom.js' %}"></script>
+     <script src="{%static 'js/jquery.js' %}"></script>
+     <script type="text/javascript">
+					var CID = "endtime";
+
+					if(window.CID != null)
+					{
+						// var dTime = document.getElementById(CID).innerText;
+						// var iTime = dTime*24*3600;
+                        var iTime = document.getElementById(CID).innerText;
+						var Account;
+
+						RemainTime();
+					}
+					function RemainTime()
+					{
+						var iDay,iHour,iMinute,iSecond;
+						var sDay="",sHour="",sMinute="",sSecond="",sTime="";
+						if (iTime >= 0)
+						{
+							iDay = parseInt(iTime/24/3600);
+							if (iDay > 0)
+							{
+								sDay = iDay + "天";
+							}
+							iHour = parseInt((iTime/3600)%24);
+							if (iHour > 0){
+								sHour = iHour + ":";
+							}
+							iMinute = parseInt((iTime/60)%60);
+							if (iMinute > 0){
+								sMinute = iMinute + ":";
+							}
+							iSecond = parseInt(iTime%60);
+							if (iSecond >= 0){
+								sSecond = iSecond + "";
+							}
+							if ((sDay=="")&&(sHour=="")){
+								sTime="<span style='color:darkorange'>" + sMinute+sSecond + "</font>";
+							}
+							else
+							{
+								sTime=sDay+sHour+sMinute+sSecond;
+							}
+							if(iTime==0){
+								clearTimeout(Account);
+								  sTime="<span style='color:green'>！</span>";
+                                  window.location.href='/exam/end_exam/';
+
+							}
+							else
+							{
+								Account = setTimeout("RemainTime()",1000);
+							}
+							iTime=iTime-1;
+						}
+						else
+						{
+								sTime="<span style='color:red'>考试时间到！</span>";
+                                {#$.get('/exam/end_exam/')#}
+						}
+						document.getElementById(CID).innerHTML = sTime;
+					}
+
+     </script> <!--倒计时脚本-->
 
 </body>
 </html>

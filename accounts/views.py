@@ -9,6 +9,7 @@ from . import forms
 from challenges.models import Challenges
 import hashlib
 
+from exam.views import in_exam
 
 # Create your views here.
 
@@ -51,6 +52,10 @@ def login(request):
                 request.session['user_name'] = user.name
                 request.session['student_id'] = user.student_id
                 request.session['email'] = user.email
+                if in_exam(request):
+                    request.session['exam'] = 1
+                else:
+                    request.session['exam'] = 0
                 try:
                     request.session['team_name'] = user.team.team_name
                     if user.name == user.team.team_leader:

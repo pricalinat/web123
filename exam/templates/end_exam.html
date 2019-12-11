@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>End Exam</title>
+</head>
+<body>
+恭喜你完成考试！ <br>
+你一共做出了{{ num }}道题 <br>
+总成绩为{{ point }} <br>
+{% if addition %}
+    额外加成为{{ point }} × 20% = {{ addition }}
+{% else %}
+    很遗憾，无额外加成
+{% endif %}
+</body>
+</html>

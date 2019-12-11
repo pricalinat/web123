@@ -5,6 +5,7 @@ from .forms import flagForm
 from django.http import HttpResponse
 from . import models
 from accounts import models as accounts_models
+from exam import views as e_views
 
 
 # Create your views here.
@@ -20,6 +21,7 @@ def index(request):
     data_re = []
     data_pwn = []
     data_web = []
+    data_c = []
     for c in challenge:
         if c.category == 0:  # re
             is_solved = 0
@@ -54,6 +56,17 @@ def index(request):
                 is_collected = 1
             w = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved, is_collected)
             data_web.append(w)
+        elif c.category == 3:  # crypto
+            is_solved = 0
+            is_collected = 0
+            solver = c.solver.all()
+            collector = c.collector.all()
+            if current_user in solver:
+                is_solved = 1
+            if current_user in collector:
+                is_collected = 1
+            cr = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved, is_collected)
+            data_c.append(cr)
     return render(request, 'challenges_list.html', locals())
 
 
@@ -131,6 +144,8 @@ class IndexView(View):
                     response = '<strong id="flag_correct"><p >FIRST BLOOD!</p></strong>'
                 else:
                     response = '<strong id="flag_correct"><p>CORRECT</p></strong>'
+                if e_views.in_exam(request) and e_views.rest_time(request)>0:    # 如果正在考试而且没有超时，给考试的point也加分
+                    e_views.correct(request,challenge.point)
                 return HttpResponse(response)
             else:
                 response = '<h2 id="flag_incorrect" style="color:white;"><h2>INCORRECT</h2></h2> '
@@ -192,6 +207,7 @@ def collection(request):
     data_re = []
     data_pwn = []
     data_web = []
+    data_c = []
     for c in challenge:
         if c.category == 0 and c.collector.filter(id=current_id).exists():  # re
             is_solved = 0
@@ -229,6 +245,17 @@ def collection(request):
             w = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved,
                                is_collected)
             data_web.append(w)
+        elif c.category == 3:  # crypto
+            is_solved = 0
+            is_collected = 0
+            solver = c.solver.all()
+            collector = c.collector.all()
+            if current_user in solver:
+                is_solved = 1
+            if current_user in collector:
+                is_collected = 1
+            cr = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved, is_collected)
+            data_c.append(cr)
     return render(request, 'challenges_list.html', locals())
 
 def sortedByDif(request):

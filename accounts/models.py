@@ -2,9 +2,6 @@ from django.db import models
 
 
 # Create your models here.
-# def get_challenges():
-#     from challenges.models import Challenges
-#     return Challenges
 
 
 class User(models.Model):

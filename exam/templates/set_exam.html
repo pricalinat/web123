@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>set exam</title>
+</head>
+<body>
+导航栏(没有challenge） <br>
+声明: <br>
+1. 可以自己选择题目难度和类型 <br>
+2. 考试期间不可以去题库做题 <br>
+3. 每次考试一共四道题，考试时间为24小时 <br>
+4. 时间到了会自动交卷 <br>
+5. 若考试成绩超过满分的70%，则可以额外获得考试成绩*20%的个人积分 <br><br>
+<form action="/exam/set_exam/" method="post">
+    {% if message %}
+        <div class="alert alert-warning">{{ message }}</div>
+    {% endif %}
+    {% csrf_token %}
+    <span>难度</span>
+    <select name="diff">
+        <option value="low">low</option>
+        <option value="medium">medium</option>
+        <option value="high">high</option>
+        <option value="all">all</option>
+    </select>
+    <span>类型</span>
+    <select name="p_type">
+        <option value="0">reverse</option>
+        <option value="1">pwn</option>
+        <option value="2">web</option>
+        <option value="3">crypto</option>
+        <option value="all">all</option>
+    </select>
+    <button type="submit">生成试卷</button>
+</form>
+</body>
+</html>
