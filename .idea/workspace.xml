@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="16e9d7fc-6b39-40df-9253-ca8ce7dc31ec" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenges/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenges/templates/challenges_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/templates/challenges_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenges/templates/challenges_sortedByDiff.html" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/templates/challenges_sortedByDiff.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenges/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myctf/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/myctf/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myctf/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/myctf/urls.py" afterDir="false" />
-    </list>
+    <list default="true" id="16e9d7fc-6b39-40df-9253-ca8ce7dc31ec" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -238,7 +227,7 @@
       <workItem from="1575708194805" duration="5101000" />
       <workItem from="1575788855823" duration="1480000" />
       <workItem from="1575878066368" duration="15718000" />
-      <workItem from="1575967627829" duration="24826000" />
+      <workItem from="1575967627829" duration="25131000" />
     </task>
     <task id="LOCAL-00001" summary="完善了数据库部分，注册登录用学号，姓名自动在表里找（用学号匹配）">
       <created>1570957542116</created>
@@ -415,7 +404,14 @@
       <option name="project" value="LOCAL" />
       <updated>1575897596600</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Exam">
+      <created>1576049870320</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1576049870320</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -447,7 +443,8 @@
     <MESSAGE value="scene" />
     <MESSAGE value="new" />
     <MESSAGE value="12/9" />
-    <option name="LAST_COMMIT_MESSAGE" value="12/9" />
+    <MESSAGE value="Exam" />
+    <option name="LAST_COMMIT_MESSAGE" value="Exam" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
