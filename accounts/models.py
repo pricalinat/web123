@@ -74,3 +74,4 @@ class Suggestion(models.Model):
 
     def __str__(self):
         return '来自' + self.user_name
+

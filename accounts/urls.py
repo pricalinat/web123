@@ -1,6 +1,10 @@
-from django.urls import path
+from django.urls import path,re_path
 from . import views
 from django.urls import include
+from django.views.static import serve
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('', views.index),

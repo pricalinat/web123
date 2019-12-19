@@ -122,7 +122,7 @@ class IndexView(View):
         current_id = request.session['user_id']
         current_user = accounts_models.User.objects.get(id=current_id)
         if challenge.solver.filter(id=current_id).exists():
-            response = '<strong id="flag_already"><p>ALREADY SUBMITTED</p></strong>'
+            response = 'ALREADY SUBMITTED'
             return HttpResponse(response)
         else:
             if flag == challenge.flag:
@@ -141,14 +141,14 @@ class IndexView(View):
                 except:
                     pass
                 if first_blood == 1:
-                    response = '<strong id="flag_correct"><p >FIRST BLOOD!</p></strong>'
+                    response = 'FIRST BLOOD!'
                 else:
-                    response = '<strong id="flag_correct"><p>CORRECT</p></strong>'
+                    response = 'CORRECT'
                 if e_views.in_exam(request) and e_views.rest_time(request)>0:    # 如果正在考试而且没有超时，给考试的point也加分
                     e_views.correct(request,challenge.point)
                 return HttpResponse(response)
             else:
-                response = '<h2 id="flag_incorrect" style="color:white;"><h2>INCORRECT</h2></h2> '
+                response = 'INCORRECT'
                 return HttpResponse(response)
 
         # form = flagForm(request.POST)
@@ -190,13 +190,11 @@ def collect(request, challenge_id):
     if challenge.collector.filter(id=current_id).exists():
         challenge.collector.remove(current_user)
         challenge.save()
-        response = '<strong id="collect_already"><p>取消成功</p></strong>'
-        return HttpResponse(response)
+        return redirect('/challenges/')
     else:
         challenge.collector.add(current_user)
         challenge.save()
-        response = '<strong id="collect_ok"><p>收藏成功</p></strong>'
-        return HttpResponse(response)
+        return redirect('/challenges/')
 
 def collection(request):
     if not request.session.get('is_login', None):
@@ -245,7 +243,7 @@ def collection(request):
             w = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved,
                                is_collected)
             data_web.append(w)
-        elif c.category == 3:  # crypto
+        elif c.category == 3 and c.collector.filter(id=current_id).exists():  # crypto
             is_solved = 0
             is_collected = 0
             solver = c.solver.all()
@@ -256,6 +254,7 @@ def collection(request):
                 is_collected = 1
             cr = PassInsideView(c.name, c.category, c.message, c.point, c.file, c.flag, c.id, c.scene, is_solved, is_collected)
             data_c.append(cr)
+            isCollection = 'Here are Your Collections'
     return render(request, 'challenges_list.html', locals())
 
 def sortedByDif(request):

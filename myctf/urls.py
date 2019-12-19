@@ -28,4 +28,5 @@ urlpatterns = [
     path('teams/',include('teams.urls')),
     path('scoreboard/', include('scoreboard.urls')),
     path('exam/',include('exam.urls')),
+
 ]

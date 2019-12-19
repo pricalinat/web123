@@ -48,7 +48,7 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                         <li class="section-btn"><a href="/accounts/logout/" >Logout</a></li>
+                         <li class="section-btn" id="logout"><a href="/accounts/logout/" >Logout</a></li>
                     </ul>
                </div>
 
@@ -89,9 +89,10 @@
                                                       {% csrf_token %}
 
                                                       <div class="form-group">
-                                                          {{ team_n.teamname.label_tag }}
-                                                          {{ team_n.teamname}}
+                                                          <label for="teamname" class="col-sm-2 control-label">TeamName</label>
+                                                          <div class="col-sm-10">{{ team_n.teamname}}</div>
                                                       </div>
+
                                                        <input type="submit" class="section-btn" name="submit" value="Create">
                                                   </form>
                                              </div>
@@ -173,6 +174,15 @@
      <script src="{%static 'js/jquery.magnific-popup.min.js' %}"></script>
      <script src="{%static 'js/smoothscroll.js' %}"></script>
      <script src="{%static 'js/custom.js' %}"></script>
+     <script>
+        document.getElementById('logout').onclick = function(){
+             if(confirm('确定要退出吗')==true){
+               return true;
+            }else{
+               return false;
 
+            }
+        }
+    </script>
 </body>
 </html>

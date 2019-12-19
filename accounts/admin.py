@@ -6,3 +6,4 @@ from . import models
 admin.site.register(models.User)
 admin.site.register(models.ConfirmString)
 admin.site.register(models.Suggestion)
+admin.site.register(models.BaseInfo)

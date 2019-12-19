@@ -48,7 +48,7 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                         <li class="section-btn"><a href="/accounts/logout/" >Logout</a></li>
+                         <li class="section-btn" id="logout"><a href="/accounts/logout/" >Logout</a></li>
                     </ul>
                </div>
 
@@ -84,20 +84,21 @@
                                                   <form action="/accounts/profile/change_pwd/" method="post">
                                                           {% if message %}
                                                               <div class="alert alert-warning">{{ message }}</div>
+
                                                           {% endif %}
 
                                                           {% csrf_token %}
                                                        <div class="form-group">
-                                                          {{ update_form.origin_password.label_tag }}
-                                                          {{ update_form.origin_password }}
+                                                          <label for="origin_password" class="col-sm-4 control-label">OriginPassword</label>
+                                                          <div class="col-sm-8">{{ update_form.origin_password }}</div>
                                                       </div>
                                                       <div class="form-group">
-                                                          {{ update_form.new_password.label_tag }}
-                                                          {{ update_form.new_password }}
+                                                          <label for="new_password" class="col-sm-4 control-label">NewPassword</label>
+                                                          <div class="col-sm-8">{{ update_form.new_password }}</div>
                                                       </div>
                                                       <div class="form-group">
-                                                          {{ update_form.confirm_password.label_tag }}
-                                                          {{ update_form.confirm_password }}
+                                                          <label for="new_password" class="col-sm-4 control-label">NewPassword</label>
+                                                          <div class="col-sm-8">{{ update_form.confirm_password }}</div>
                                                       </div>
                                                        <input type="submit" class="section-btn" name="submit" value="Change">
                                                   </form>
@@ -172,7 +173,6 @@
           </div>
      </footer>
 
-
      <!-- SCRIPTS -->
      <script src="{%static 'js/jquery.js' %}"></script>
      <script src="{%static 'js/bootstrap.min.js' %}"></script>
@@ -180,6 +180,15 @@
      <script src="{%static 'js/jquery.magnific-popup.min.js' %}"></script>
      <script src="{%static 'js/smoothscroll.js' %}"></script>
      <script src="{%static 'js/custom.js' %}"></script>
+     <script>
+        document.getElementById('logout').onclick = function(){
+             if(confirm('确定要退出吗')==true){
+               return true;
+            }else{
+               return false;
 
+            }
+        }
+    </script>
 </body>
 </html>

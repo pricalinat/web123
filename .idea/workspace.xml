@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="16e9d7fc-6b39-40df-9253-ca8ce7dc31ec" name="Default Changelist" comment="" />
+    <list default="true" id="16e9d7fc-6b39-40df-9253-ca8ce7dc31ec" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/myctf.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/myctf.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/static/accounts/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/static/accounts/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/profile/change_pwd.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/profile/change_pwd.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/profile/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/profile/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/templates/accounts/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/templates/accounts/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenges/templates/challenges_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/templates/challenges_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenges/templates/challenges_sortedByDiff.html" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/templates/challenges_sortedByDiff.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/challenges/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/challenges/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exam/templates/end_exam.html" beforeDir="false" afterPath="$PROJECT_DIR$/exam/templates/end_exam.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exam/templates/examination.html" beforeDir="false" afterPath="$PROJECT_DIR$/exam/templates/examination.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exam/templates/set_exam.html" beforeDir="false" afterPath="$PROJECT_DIR$/exam/templates/set_exam.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exam/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/exam/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exam/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/exam/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myctf/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/myctf/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myctf/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/myctf/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scoreboard/templates/scoreboard/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/scoreboard/templates/scoreboard/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teams/templates/teams/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/teams/templates/teams/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teams/templates/teams/manage.html" beforeDir="false" afterPath="$PROJECT_DIR$/teams/templates/teams/manage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teams/templates/teams/team_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/teams/templates/teams/team_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teams/templates/teams/teamcreate.html" beforeDir="false" afterPath="$PROJECT_DIR$/teams/templates/teams/teamcreate.html" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,16 +59,6 @@
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="db.sqlite3_test" type="feb32156:DbDataSourceImpl" />
       </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="db.sqlite3_test" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="db.sqlite3_test" type="feb32156:DbDataSourceImpl" />
-        <item name="collations" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
     </expand>
     <select />
   </component>
@@ -53,6 +74,32 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="myctf" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="PREVIEW_PUSH_PROTECTED_ONLY" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -60,20 +107,34 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\大二上\网安平台设计\myctf\challenges\templates" />
       <recent name="F:\大二上\网安平台设计\myctf" />
       <recent name="F:\大二上\网安平台设计\myctf\accounts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\RRP\Documents\GitHub\web123\accounts\templates\accounts" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -88,7 +149,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Django server.myctf">
+  <component name="RunManager" selected="Django server.myctf-rrp">
     <configuration name="Test: teams" type="DjangoTestsConfigurationType" temporary="true">
       <module name="myctf" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -131,7 +192,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="myctf" type="Python.DjangoServer" factoryName="Django server">
+    <configuration name="myctf-rrp" type="Python.DjangoServer" factoryName="Django server">
       <module name="myctf" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -141,41 +202,31 @@
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="launchJavascriptDebuger" value="false" />
       <option name="port" value="8000" />
       <option name="host" value="" />
       <option name="additionalOptions" value="" />
-      <option name="browserUrl" value="" />
+      <option name="browserUrl" value="http://127.0.0.1:8000/" />
       <option name="runTestServer" value="false" />
       <option name="runNoReload" value="false" />
       <option name="useCustomRunCommand" value="false" />
       <option name="customRunCommand" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Django server.myctf-rrp" />
+      <item itemvalue="Django tests.Test: teams" />
+      <item itemvalue="Python.models" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.models" />
         <item itemvalue="Django tests.Test: teams" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="allServicesViewState">
-      <serviceView>
-        <treeState>
-          <expand>
-            <path>
-              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@4fad5817" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-            </path>
-          </expand>
-          <select />
-        </treeState>
-      </serviceView>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -228,6 +279,16 @@
       <workItem from="1575788855823" duration="1480000" />
       <workItem from="1575878066368" duration="15718000" />
       <workItem from="1575967627829" duration="25131000" />
+      <workItem from="1576067637187" duration="7596000" />
+      <workItem from="1576136322953" duration="8232000" />
+      <workItem from="1576497140391" duration="12111000" />
+      <workItem from="1576651486149" duration="130000" />
+      <workItem from="1576651803129" duration="2678000" />
+      <workItem from="1576655216863" duration="1411000" />
+      <workItem from="1576731439073" duration="302000" />
+      <workItem from="1576737540197" duration="1463000" />
+      <workItem from="1576742321651" duration="586000" />
+      <workItem from="1576756047999" duration="21000" />
     </task>
     <task id="LOCAL-00001" summary="完善了数据库部分，注册登录用学号，姓名自动在表里找（用学号匹配）">
       <created>1570957542116</created>
@@ -445,6 +506,52 @@
     <MESSAGE value="12/9" />
     <MESSAGE value="Exam" />
     <option name="LAST_COMMIT_MESSAGE" value="Exam" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="552" y="170" width="1092" height="762" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576655263967">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="170" width="1092" height="762" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576655263967" />
+    <state x="630" y="84" key="#myctf" timestamp="1576067795859">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="630" y="84" key="#myctf-rrp" timestamp="1576655222947">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="630" y="84" key="#myctf-rrp/0.0.1920.1040@0.0.1920.1040" timestamp="1576655222947" />
+    <state x="630" y="84" key="#myctf/0.0.1920.1040@0.0.1920.1040" timestamp="1576067795859" />
+    <state x="690" y="217" key="FileChooserDialogImpl" timestamp="1576656627677">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="217" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1576656627677" />
+    <state width="1867" height="200" key="GridCell.Tab.0.bottom" timestamp="1576739004068">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1867" height="200" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576739004068" />
+    <state width="1867" height="200" key="GridCell.Tab.0.center" timestamp="1576739004068">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1867" height="200" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576739004068" />
+    <state width="1867" height="200" key="GridCell.Tab.0.left" timestamp="1576739004068">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1867" height="200" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576739004068" />
+    <state width="1867" height="200" key="GridCell.Tab.0.right" timestamp="1576739004068">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1867" height="200" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576739004068" />
+    <state x="348" y="77" key="SettingsEditor" timestamp="1576498268556">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="348" y="77" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576498268556" />
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2" timestamp="1576146142410">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="452" y="187" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576146142410" />
+    <state x="532" y="-5" width="840" height="1032" key="search.everywhere.popup" timestamp="1576498605178">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="532" y="-5" width="840" height="1032" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1576498605178" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

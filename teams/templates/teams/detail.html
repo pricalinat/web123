@@ -48,7 +48,7 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                         <li class="section-btn"><a href="/accounts/logout/" >Logout</a></li>
+                         <li class="section-btn" id="logout"><a href="/accounts/logout/" >Logout</a></li>
                     </ul>
                </div>
 
@@ -74,19 +74,17 @@
                               <div class="row">
                                    <div class="col-md-12 col-sm-12">
                                         <div class="modal-title">
-                                             <h2>战队详情</h2>
+                                             <h2>Team Details</h2>
                                         </div>
-                                        <!-- NAV TABS -->
 
-                                        <!-- TAB PANES -->
                                         <div class="tab-content" style="padding-top: 20px;text-align: left;" >
-                                             <h2 style="color: whitesmoke"><span class="label label-info">战队名称</span>&nbsp{{ team_detail.name }}</h2>
-                                             <h2 style="color: whitesmoke"><span class="label label-info">成员({{ team_detail.number }}/5)</span>
+                                             <h3 style="color: whitesmoke"><span >Team name: </span>&nbsp{{ team_detail.name }}</h2>
+                                             <h3 style="color: whitesmoke"><span >Members: ({{ team_detail.number }}/5)</span>
                                                   {% for member in team_detail.members %}
-                                                    <h3 style="color: #fff">{{ member.name}}</h3>
+                                                    <h3 style="color: #fff;text-align: center">{{ member.name}}</h3>
                                                   {% endfor %}
-                                             </h2>
-                                             <h2 style="color: whitesmoke"><span class="label label-info">积分</span>&nbsp{{ team_detail.score }}</h2>
+                                             </h3>
+                                             <h3 style="color: whitesmoke"><span >Points: </span>&nbsp{{ team_detail.score }}</h3>
                                              <h3 style="text-align: center"><a href="/teams/join/{{ team_detail.id }}/" style="float: bottom;font-size: small" class="btn section-btn smoothScroll">加入战队</a></h3>
                                         </div>
                                    </div>
@@ -165,6 +163,15 @@
      <script src="{%static 'js/jquery.magnific-popup.min.js' %}"></script>
      <script src="{%static 'js/smoothscroll.js' %}"></script>
      <script src="{%static 'js/custom.js' %}"></script>
+     <script>
+        document.getElementById('logout').onclick = function(){
+             if(confirm('确定要退出吗')==true){
+               return true;
+            }else{
+               return false;
 
+            }
+        }
+    </script>
 </body>
 </html>

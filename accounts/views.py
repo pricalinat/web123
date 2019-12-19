@@ -1,5 +1,6 @@
 import datetime
 from django.conf import settings
+from django.http import HttpResponse
 
 from django.shortcuts import render
 from django.shortcuts import redirect
@@ -11,8 +12,8 @@ import hashlib
 
 from exam.views import in_exam
 
-# Create your views here.
 
+# Create your views here.
 
 def hash_code(s, salt='myctf'):
     h = hashlib.sha256()
@@ -343,3 +344,5 @@ def suggest(request):
         suggestion.save()
         message = '感谢您的建议！'
         return render(request, 'accounts/index.html', locals())
+
+

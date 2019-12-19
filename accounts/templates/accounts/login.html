@@ -50,10 +50,6 @@
                <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-nav-first">
                          <li><a href="#" class="smoothScroll">Home</a></li>
-                         <li><a href="index.html#about" class="smoothScroll">Team</a></li>
-                         <li><a href="index.html#blog" class="smoothScroll">Challenge</a></li>
-                         <li><a href="index.html#work" class="smoothScroll">Rank</a></li>
-                         <li><a href="index.html#contact" class="smoothScroll">Suggestions</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
@@ -91,7 +87,7 @@
                                         </ul>
                                         <!-- TAB PANES -->
                                              <div role="tabpanel" class="tab-pane fade in" id="sign_in">
-                                                  <form action="/accounts/login/" method="post">
+                                                  <form action="/accounts/login/" method="post" class="form-horizontal">
                                                       <br>
                                                       {% if login_form.captcha.errors %}
                                                         <div class="alert alert-warning">{{ login_form.captcha.errors }}</div>
@@ -100,12 +96,12 @@
                                                       {% endif %}
                                                       {% csrf_token %}
                                                        <div class="form-group">
-                                                          {{ login_form.student_id.label_tag }}
-                                                          {{ login_form.student_id }}
+                                                          <label for="student_id" class="col-sm-2 control-label">School_ID</label>
+                                                           <div class="col-sm-10">{{ login_form.student_id }}</div>
                                                        </div>
                                                        <div class="form-group">
-                                                          {{ login_form.password.label_tag }}
-                                                          {{ login_form.password }}
+                                                          <label for="password" class="col-sm-2 control-label">Password</label>
+                                                          <div class="col-sm-10">{{ login_form.password }}</div>
                                                        </div>
                                                        <br>
                                                        <div class="captcha">

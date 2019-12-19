@@ -145,3 +145,5 @@ EMAIL_HOST_PASSWORD = 'ypvfvhndgradfhbh'
 # 注册有效期天数
 CONFIRM_DAYS = 7
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

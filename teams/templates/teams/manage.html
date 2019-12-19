@@ -48,7 +48,7 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                         <li class="section-btn"><a href="/accounts/logout/">Logout</a></li>
+                         <li class="section-btn" id="logout"><a href="/accounts/logout/">Logout</a></li>
                     </ul>
                </div>
 
@@ -82,21 +82,20 @@
                                           {% endif %}
                                         <!-- TAB PANES -->
                                         <div class="tab-content" style="padding-top: 20px;text-align: left;" >
-                                             <h3 style="color: whitesmoke"><span class="label label-info">现队名</span>&nbsp{{ request.session.team_name }}</h3>
-                                             <br>
+                                            <div class="form-group">
+                                                <label for="team_name" class="col-sm-2 control-label">NowName</label>
+                                                <div class="col-sm-8">{{ request.session.team_name }} </div>
+                                            </div>
+                                            <br>
                                             <form action="/teams/manage/" method="post">
                                               {% csrf_token %}
                                               <div class="form-group">
-                                                  {{ updateName_form.teamename.label_tag }}
-                                                  {{ updateName_form.teamname }}
+                                                  <label for="student_id" class="col-sm-2 control-label">NewName</label>
+                                                  <div class="col-sm-8">{{ updateName_form.teamname }}</div>
+                                                  <span class="input-group-btn"><button type="submit" class="btn btn-default;"style="">修改</button></span>
                                               </div>
-                                                <span class="input-group-btn"><button type="submit" class="btn btn-default">修改</button></span>
                                           </form>
-                                    {#                                             <div class="input-group">#}
-{#                                                  <input type="text" class="form-control" placeholder="请输入新的队名...">#}
-{#                                                  <span class="input-group-btn"><button class="btn btn-default" type="button">修改</button></span>#}
-{#                                             </div>#}
-                                             <h3 style="color: whitesmoke"><span class="label label-info">队员</span>
+                                             <span style="font-size: large">memebers_list:</span>
                                                  <br><br>
                                                   {% if number > 1 %}
                                                       {% for member in members %}
@@ -104,7 +103,7 @@
                                                           <div>
                                                               <div>
                                                                   {{member.name}}
-                                                                  <a href="/teams/manage/delete/{{ member.id }}/" class="btn btn-info" style="margin-left: 80px;">狠心抛弃</a><br>
+                                                                  <a href="/teams/manage/delete/{{ member.id }}/" class="btn btn-info" style="margin-left: 80px;" id="giveup">狠心抛弃</a><br>
                                                               </div>
                                                               <br><br><br>
                                                           </div>
@@ -114,7 +113,7 @@
                                                       <div style="margin-bottom: 15px">您暂时还是一位光杆司令，赶紧去招募强力的队友吧！</div>
                                                   {% endif %}
                                              </h3>
-                                             <h3 style="text-align: center"><a href="/teams/manage/disband/" style="float: bottom;font-size: small" class="btn section-btn smoothScroll">解散战队</a></h3>
+                                             <h3 style="text-align: center"><a href="/teams/manage/disband/" style="float: bottom;font-size: small" class="btn section-btn smoothScroll" id="dismiss">解散战队</a></h3>
                                         </div>
                                    </div>
 
@@ -192,6 +191,32 @@
      <script src="{%static 'js/jquery.magnific-popup.min.js' %}"></script>
      <script src="{%static 'js/smoothscroll.js' %}"></script>
      <script src="{%static 'js/custom.js' %}"></script>
+     <script>
+        document.getElementById('logout').onclick = function(){
+             if(confirm('确定要退出吗')==true){
+               return true;
+            }else{
+               return false;
+
+            }
+        }
+        document.getElementById('dismiss').onclick = function(){
+             if(confirm('确定要解散吗')==true){
+               return true;
+            }else{
+               return false;
+
+            }
+        }
+        document.getElementById('giveup').onclick = function(){
+             if(confirm('确定要抛弃吗')==true){
+               return true;
+            }else{
+               return false;
+
+            }
+        }
+    </script>
 
 </body>
 </html>

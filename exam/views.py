@@ -1,7 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 import datetime
-import pyzt
 from django.conf import settings
 
 from django.shortcuts import render
@@ -66,7 +65,7 @@ def set_exam(request):
                     problems = low_p[0:4].copy()
                 else:
                     for c in low_p:
-                        if c.category == p_type:
+                        if str(c.category) == p_type:
                             problems.append(c)
                     if len(problems) >= 4:
                         problems = problems[0:4]
@@ -87,7 +86,7 @@ def set_exam(request):
                     problems = medium_p[0:4].copy()
                 else:
                     for c in medium_p:
-                        if c.category == p_type:
+                        if str(c.category) == p_type:
                             problems.append(c)
                     if len(problems) >= 4:
                         problems = problems[0:4]
@@ -108,7 +107,7 @@ def set_exam(request):
                     problems = high_p[0:4].copy()
                 else:
                     for c in high_p:
-                        if c.category == p_type:
+                        if str(c.category) == p_type:
                             problems.append(c)
                     if len(problems) >= 4:
                         problems = problems[0:4]
@@ -125,7 +124,7 @@ def set_exam(request):
                     problems = challenge[0:4].copy()
                 else:
                     for c in challenge:
-                        if c.category == p_type:
+                        if str(c.category) == p_type:
                             problems.append(c)
                     if len(problems) >= 4:
                         problems = problems[0:4]
@@ -154,6 +153,8 @@ def examination(request):
         return redirect('/accounts/login/')
     if not in_exam(request):
         return redirect('/exam/set_exam/')
+    if rest_time(request)<0:
+        return redirect('/exam/end_exam/')
     current_id = request.session['user_id']
     current_user = accounts_models.User.objects.get(id=current_id)
     e = models.Exam.objects.get(user=current_user)

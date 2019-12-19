@@ -48,7 +48,7 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                         <li class="section-btn"><a href="/accounts/logout/" >Logout</a></li>
+                         <li class="section-btn"id="logout"><a href="/accounts/logout/" >Logout</a></li>
                     </ul>
                </div>
 
@@ -74,21 +74,21 @@
                               <div class="row">
                                    <div class="col-md-12 col-sm-12">
                                         <div class="modal-title">
-                                             <h2>个人信息</h2>
+                                             <h2>Profile</h2>
                                         </div>
                                         <!-- NAV TABS -->
 
                                         <!-- TAB PANES -->
                                         <div class="tab-content" style="padding-top: 20px;text-align: left;" >
-                                             <h2 style="color: whitesmoke"><span class="label label-info">账号</span>&nbsp{{ request.session.student_id }}</h2>
-                                             <h2 style="color: whitesmoke"><span class="label label-info">姓名</span>&nbsp{{ request.session.user_name }}</h2>
-                                             <h2 style="color: whitesmoke"><span class="label label-info">邮箱</span>&nbsp{{ request.session.email }}</h2>
-                                             <h2 style="color: whitesmoke"><span class="label label-info">战队</span>&nbsp{{ request.session.team_name }}
+                                             <h2 style="color: whitesmoke"><span >Student_ID:</span>&nbsp{{ request.session.student_id }}</h2>
+                                             <h2 style="color: whitesmoke"><span >Name:</span>&nbsp{{ request.session.user_name }}</h2>
+                                             <h2 style="color: whitesmoke"><span >Email:</span>&nbsp{{ request.session.email }}</h2>
+                                             <h2 style="color: whitesmoke"><span >Team:</span>&nbsp{{ request.session.team_name }}
 {#                                                 {% if request.session.is_leader == 1%}#}
                                                  <a href="/teams/manage/" style="text-align: right;float: right;font-size: small" class="btn section-btn smoothScroll">管理战队</a></h2>
 {#                                                 {% endif %}#}
-                                             <h2 style="color: whitesmoke"><span class="label label-info">积分</span>&nbsp{{ user.point }}</h2>
-                                             <h2 style="color: whitesmoke"><span class="label label-info">已解决</span>
+                                             <h2 style="color: whitesmoke"><span >Points</span>&nbsp{{ user.point }}</h2>
+                                             <h2 style="color: whitesmoke"><span class="label label-info">Done:</span>
                                                   {% if length != 0 %}
                                                       {% for challenge in solved %}
                                                         &nbsp{{ challenge.name }}&nbsp
@@ -175,6 +175,15 @@
      <script src="{%static 'js/jquery.magnific-popup.min.js' %}"></script>
      <script src="{%static 'js/smoothscroll.js' %}"></script>
      <script src="{%static 'js/custom.js' %}"></script>
+     <script>
+        document.getElementById('logout').onclick = function(){
+             if(confirm('确定要退出吗')==true){
+               return true;
+            }else{
+               return false;
 
+            }
+        }
+    </script>
 </body>
 </html>
